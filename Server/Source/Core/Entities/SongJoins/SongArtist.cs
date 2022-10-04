@@ -14,5 +14,8 @@ public class SongArtist
         SongId = songId;
         ArtistId = artistId;
     }
+
+
+    private SongArtist() { } //Required by EF Core
 }
 

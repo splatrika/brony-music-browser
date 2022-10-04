@@ -11,5 +11,8 @@ public class AlbumArtist
         AlbumId = albumId;
         ArtistId = artistId;
     }
+
+
+    private AlbumArtist() { } //Required by EF Core
 }
 

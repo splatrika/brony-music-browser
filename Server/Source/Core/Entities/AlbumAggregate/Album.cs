@@ -23,6 +23,9 @@ public class Album : EntityBase
     }
 
 
+    private Album() { } //Required by EF Core
+
+
     public void UpdateDetails(string title)
     {
         Title = Guard.Against.NullOrEmpty(title);

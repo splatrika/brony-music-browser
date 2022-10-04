@@ -15,6 +15,9 @@ public class Artist : EntityBase
     }
 
 
+    private Artist() { } //Required by EF Core
+
+
     public void UpdateDetails(string name)
     {
         Name = Guard.Against.NullOrEmpty(name);

@@ -14,5 +14,8 @@ public class SongGenre
         SongId = songId;
         GenreId = genreId;
     }
+
+
+    private SongGenre() { } //Required by EF Core
 }
 

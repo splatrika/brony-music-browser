@@ -14,5 +14,8 @@ public class SongCharacter
         SongId = songId;
         CharacterId = characterId;
     }
+
+
+    private SongCharacter() { } //Required by EF Core
 }
 

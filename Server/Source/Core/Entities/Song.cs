@@ -17,6 +17,9 @@ public class Song : EntityBase
     }
 
 
+    private Song() { } //Required by EF Core
+
+
     public void UpdateDetails(string title, int year, string youTubeId)
     {
         Title = Guard.Against.NullOrEmpty(title);

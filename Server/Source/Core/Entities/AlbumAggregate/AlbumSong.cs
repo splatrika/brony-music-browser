@@ -11,5 +11,8 @@ public class AlbumSong
         AlbumId = albumId;
         SongId = songId;
     }
+
+
+    private AlbumSong() { } //Required by EF
 }
 

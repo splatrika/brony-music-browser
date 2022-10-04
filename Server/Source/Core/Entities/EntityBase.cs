@@ -4,9 +4,13 @@ public class EntityBase
 {
     public int Id { get; private set; }
 
+
     public EntityBase(int id)
     {
         Id = id;
     }
+
+
+    protected EntityBase() { } //Required by EF Core
 }
 

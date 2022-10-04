@@ -16,6 +16,9 @@ public class Genre : EntityBase
     }
 
 
+    private Genre() { } //Required by EF Core
+
+
     public void UpdateDetails(string caption, int order)
     {
         Caption = Guard.Against.NullOrEmpty(caption);
