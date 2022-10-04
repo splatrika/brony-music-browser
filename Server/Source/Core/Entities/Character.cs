@@ -15,7 +15,7 @@ public class Character : EntityBase
         UpdateDetails(name, icon, order);
     }
 
-    private void UpdateDetails(string name, string icon, int order)
+    public void UpdateDetails(string name, string icon, int order)
     {
         Name = Guard.Against.NullOrEmpty(name);
         Icon = icon;

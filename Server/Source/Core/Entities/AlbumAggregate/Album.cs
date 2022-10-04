@@ -7,7 +7,6 @@ namespace Splatrika.BronyMusicBrowser.Core.Entities.AlbumAggregate;
 public class Album : EntityBase
 {
     public string Title { get; private set; }
-
     public IReadOnlyCollection<AlbumSong> Songs => _songs.AsReadOnly();
     public IReadOnlyCollection<AlbumArtist> Artists => _artists.AsReadOnly();
 
@@ -24,7 +23,7 @@ public class Album : EntityBase
     }
 
 
-    private void UpdateDetails(string title)
+    public void UpdateDetails(string title)
     {
         Title = Guard.Against.NullOrEmpty(title);
     }

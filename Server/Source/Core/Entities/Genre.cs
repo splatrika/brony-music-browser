@@ -16,7 +16,7 @@ public class Genre : EntityBase
     }
 
 
-    private void UpdateDetails(string caption, int order)
+    public void UpdateDetails(string caption, int order)
     {
         Caption = Guard.Against.NullOrEmpty(caption);
         Order = order;

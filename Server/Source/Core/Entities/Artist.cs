@@ -15,7 +15,7 @@ public class Artist : EntityBase
     }
 
 
-    private void UpdateDetails(string name)
+    public void UpdateDetails(string name)
     {
         Name = Guard.Against.NullOrEmpty(name);
     }
