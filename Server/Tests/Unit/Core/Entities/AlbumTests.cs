@@ -8,7 +8,7 @@ public class AlbumTests
     [Fact]
     public void Create()
     {
-        var album = new Album(id: 10, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 10, firstSongId: 2, title: "Album1", cover: "/");
 
         Assert.Equal(10, album.Id);
         Assert.Equal("Album1", album.Title);
@@ -22,7 +22,7 @@ public class AlbumTests
     [Fact]
     public void AddNewSong()
     {
-        var album = new Album(id: 10, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 10, firstSongId: 2, title: "Album1", cover: "/");
         album.AddSong(4);
 
         Assert.Equal(2, album.Songs.Count);
@@ -33,7 +33,7 @@ public class AlbumTests
     [Fact]
     public void AddSongThatAlreadyInAlbum()
     {
-        var album = new Album(id: 10, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 10, firstSongId: 2, title: "Album1", cover: "/");
 
         Assert.Throws<InvalidOperationException>(
             () => album.AddSong(2));
@@ -43,7 +43,7 @@ public class AlbumTests
     [Fact]
     public void RemoveSongWhenCountMoreThanOne()
     {
-        var album = new Album(id: 10, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 10, firstSongId: 2, title: "Album1", cover: "/");
         album.AddSong(3);
         album.RemoveSong(2);
 
@@ -55,7 +55,7 @@ public class AlbumTests
     [Fact]
     public void RemoveSongWhenCountIsOne()
     {
-        var album = new Album(id: 10, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 10, firstSongId: 2, title: "Album1", cover: "/");
 
         Assert.Throws<InvalidOperationException>(
             () => album.RemoveSong(2));
@@ -65,7 +65,7 @@ public class AlbumTests
     [Fact]
     public void RemoveNonexistentSong()
     {
-        var album = new Album(id: 10, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 10, firstSongId: 2, title: "Album1", cover: "/");
         album.AddSong(12);
 
         Assert.Throws<InvalidOperationException>(
@@ -76,17 +76,18 @@ public class AlbumTests
     [Fact]
     public void UpdateDetails()
     {
-        var album = new Album(id: 10, firstSongId: 2, title: "Album1");
-        album.UpdateDetails("Album2");
+        var album = new Album(id: 10, firstSongId: 2, title: "Album1", cover: "/");
+        album.UpdateDetails(title: "Album2", cover: "/cover.png");
 
         Assert.Equal("Album2", album.Title);
+        Assert.Equal("/cover.png", album.Cover);
     }
 
 
     [Fact]
     public void AddArtist()
     {
-        var album = new Album(id: 11, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 11, firstSongId: 2, title: "Album1", cover: "/");
         album.AddArtist(12);
 
         Assert.Equal(1, album.Artists.Count);
@@ -98,7 +99,7 @@ public class AlbumTests
     [Fact]
     public void RemoveArtist()
     {
-        var album = new Album(id: 11, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 11, firstSongId: 2, title: "Album1", cover: "/");
         album.AddArtist(12);
         album.RemoveArtist(12);
 
@@ -109,7 +110,7 @@ public class AlbumTests
     [Fact]
     public void RemoveNonexistentArtist()
     {
-        var album = new Album(id: 11, firstSongId: 2, title: "Album1");
+        var album = new Album(id: 11, firstSongId: 2, title: "Album1", cover: "/");
 
         Assert.Throws<InvalidOperationException>(
             () => album.RemoveArtist(2));

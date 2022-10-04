@@ -7,6 +7,7 @@ namespace Splatrika.BronyMusicBrowser.Core.Entities.AlbumAggregate;
 public class Album : EntityBase
 {
     public string Title { get; private set; }
+    public string Cover { get; private set; }
     public IReadOnlyCollection<AlbumSong> Songs => _songs.AsReadOnly();
     public IReadOnlyCollection<AlbumArtist> Artists => _artists.AsReadOnly();
 
@@ -14,9 +15,9 @@ public class Album : EntityBase
     private List<AlbumArtist> _artists;
 
 
-    public Album(int id, int firstSongId, string title) : base(id)
+    public Album(int id, int firstSongId, string title, string cover) : base(id)
     {
-        UpdateDetails(title);
+        UpdateDetails(title, cover);
         _songs = new();
         _artists = new();
         AddSong(firstSongId);
@@ -26,9 +27,10 @@ public class Album : EntityBase
     private Album() { } //Required by EF Core
 
 
-    public void UpdateDetails(string title)
+    public void UpdateDetails(string title, string cover)
     {
         Title = Guard.Against.NullOrEmpty(title);
+        Cover = cover;
     }
 
 
