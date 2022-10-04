@@ -7,4 +7,22 @@
     <RootNamespace>Splatrika.BronyMusicBrowser.Core</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Entities\" />
+    <None Remove="Ardalis.GuardClauses" />
+    <None Remove="Entities\SongJoins\" />
+    <None Remove="Entities\ReadOnly\" />
+    <None Remove="Entities\AlbumAggregate\" />
+    <None Remove="Entities\AlbumAggregate\ReadOnly\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Entities\SongJoins\" />
+    <Folder Include="Entities\ReadOnly\" />
+    <Folder Include="Entities\AlbumAggregate\" />
+    <Folder Include="Entities\AlbumAggregate\ReadOnly\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
+  </ItemGroup>
 </Project>
