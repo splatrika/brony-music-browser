@@ -11,7 +11,7 @@ using Splatrika.BronyMusicBrowser.Infrastructure.Data;
 namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(BrowserContext))]
-    [Migration("20221004175052_InitialModel")]
+    [Migration("20221005183941_InitialModel")]
     partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,7 +98,8 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -106,7 +107,9 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Order")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -127,7 +130,9 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Order")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -176,8 +181,7 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.HasIndex("SongId")
-                        .IsUnique();
+                    b.HasIndex("SongId");
 
                     b.ToTable("SongArtists");
                 });
@@ -194,8 +198,7 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.HasIndex("SongId")
-                        .IsUnique();
+                    b.HasIndex("SongId");
 
                     b.ToTable("SongCharacters");
                 });
@@ -212,8 +215,7 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.HasIndex("SongId")
-                        .IsUnique();
+                    b.HasIndex("SongId");
 
                     b.ToTable("SongGenres");
                 });
@@ -238,53 +240,47 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Splatrika.BronyMusicBrowser.Core.Entities.SongJoins.SongArtist", b =>
                 {
-                    b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Artist", "Artist")
+                    b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Artist", null)
                         .WithMany()
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Song", null)
-                        .WithOne()
-                        .HasForeignKey("Splatrika.BronyMusicBrowser.Core.Entities.SongJoins.SongArtist", "SongId")
+                        .WithMany("Artists")
+                        .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Artist");
                 });
 
             modelBuilder.Entity("Splatrika.BronyMusicBrowser.Core.Entities.SongJoins.SongCharacter", b =>
                 {
-                    b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Character", "Character")
+                    b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Character", null)
                         .WithMany()
                         .HasForeignKey("CharacterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Song", null)
-                        .WithOne()
-                        .HasForeignKey("Splatrika.BronyMusicBrowser.Core.Entities.SongJoins.SongCharacter", "SongId")
+                        .WithMany("Characters")
+                        .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Character");
                 });
 
             modelBuilder.Entity("Splatrika.BronyMusicBrowser.Core.Entities.SongJoins.SongGenre", b =>
                 {
-                    b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Genre", "Genre")
+                    b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Genre", null)
                         .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Splatrika.BronyMusicBrowser.Core.Entities.Song", null)
-                        .WithOne()
-                        .HasForeignKey("Splatrika.BronyMusicBrowser.Core.Entities.SongJoins.SongGenre", "SongId")
+                        .WithMany("Genres")
+                        .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("Splatrika.BronyMusicBrowser.Core.Entities.AlbumAggregate.Album", b =>
@@ -292,6 +288,15 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
                     b.Navigation("Artists");
 
                     b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("Splatrika.BronyMusicBrowser.Core.Entities.Song", b =>
+                {
+                    b.Navigation("Artists");
+
+                    b.Navigation("Characters");
+
+                    b.Navigation("Genres");
                 });
 #pragma warning restore 612, 618
         }

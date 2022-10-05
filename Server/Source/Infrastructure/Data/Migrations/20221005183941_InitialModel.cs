@@ -42,8 +42,8 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Order = table.Column<int>(type: "int", nullable: false)
+                    Icon = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
@@ -57,7 +57,7 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Caption = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Order = table.Column<int>(type: "int", nullable: false)
+                    Order = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
@@ -196,8 +196,7 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_SongArtists_SongId",
                 table: "SongArtists",
-                column: "SongId",
-                unique: true);
+                column: "SongId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SongCharacters_CharacterId",
@@ -207,8 +206,7 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_SongCharacters_SongId",
                 table: "SongCharacters",
-                column: "SongId",
-                unique: true);
+                column: "SongId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SongGenres_GenreId",
@@ -218,8 +216,7 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_SongGenres_SongId",
                 table: "SongGenres",
-                column: "SongId",
-                unique: true);
+                column: "SongId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
