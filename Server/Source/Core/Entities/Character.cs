@@ -11,7 +11,8 @@ public class Character : EntityBase
     public int Order { get; private set; }
 
 
-    public Character(int id, string name, string icon, int order) : base(id)
+    public Character(int id, string name, string icon, int order = 0)
+        : base(id)
     {
         UpdateDetails(name, icon, order);
     }

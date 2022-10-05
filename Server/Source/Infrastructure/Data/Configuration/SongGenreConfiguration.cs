@@ -10,11 +10,11 @@ public class SongGenreConfiguration : IEntityTypeConfiguration<SongGenre>
     public void Configure(EntityTypeBuilder<SongGenre> builder)
     {
         builder.HasKey(e => new { e.SongId, e.GenreId });
+        builder.HasIndex(e => e.SongId);
 
-        builder.HasOne<Song>()
-            .WithOne()
-            .HasForeignKey<SongGenre>(e => e.SongId)
-            .IsRequired();
+        builder.HasOne<Genre>()
+            .WithMany()
+            .HasForeignKey(e => e.GenreId);
     }
 }
 

@@ -11,6 +11,12 @@ public class CharacterConfiguration : IEntityTypeConfiguration<Character>
         builder.Property(e => e.Name)
             .HasMaxLength(100)
             .IsRequired();
+
+        builder.Property(e => e.Icon)
+            .HasMaxLength(500);
+
+        builder.Property(e => e.Order)
+            .HasDefaultValue(0);
     }
 }
 

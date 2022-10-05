@@ -6,7 +6,6 @@ public class SongCharacter
 {
     public int SongId { get; private set; }
     public int CharacterId { get; private set; }
-    public Character Character { get; private set; }
 
 
     public SongCharacter(int songId, int characterId)
@@ -14,8 +13,5 @@ public class SongCharacter
         SongId = songId;
         CharacterId = characterId;
     }
-
-
-    private SongCharacter() { } //Required by EF Core
 }
 

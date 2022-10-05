@@ -11,11 +11,11 @@ public class SongCharacterConfiguration
     public void Configure(EntityTypeBuilder<SongCharacter> builder)
     {
         builder.HasKey(e => new { e.SongId, e.CharacterId });
+        builder.HasIndex(e => e.SongId);
 
-        builder.HasOne<Song>()
-            .WithOne()
-            .HasForeignKey<SongCharacter>(e => e.SongId)
-            .IsRequired();
+        builder.HasOne<Character>()
+            .WithMany()
+            .HasForeignKey(e => e.CharacterId);
     }
 }
 

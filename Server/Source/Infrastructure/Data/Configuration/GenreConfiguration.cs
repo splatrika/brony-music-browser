@@ -11,6 +11,9 @@ public class GenreConfiguration : IEntityTypeConfiguration<Genre>
         builder.Property(e => e.Caption)
             .HasMaxLength(100)
             .IsRequired();
+
+        builder.Property(e => e.Order)
+            .HasDefaultValue(0);
     }
 }
 

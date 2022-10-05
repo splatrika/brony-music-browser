@@ -19,6 +19,18 @@ public class SongConfiguration : IEntityTypeConfiguration<Song>
         builder.Property(e => e.YouTubeId)
             .HasMaxLength(11)
             .IsRequired();
+
+        builder.Navigation(e => e.Artists)
+            .HasField("_artists")
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        builder.Navigation(e => e.Genres)
+            .HasField("_genres")
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        builder.Navigation(e => e.Characters)
+            .HasField("_characters")
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }
 
