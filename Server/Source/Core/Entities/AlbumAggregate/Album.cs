@@ -24,7 +24,13 @@ public class Album : EntityBase
     }
 
 
-    private Album() { } //Required by EF Core
+#pragma warning disable IDE0051
+    //Required by EF Core
+    private Album(int id, string title, string cover) : base(id)
+    {
+        UpdateDetails(title, cover);
+    }
+#pragma warning restore IDE0051
 
 
     public void UpdateDetails(string title, string cover)
@@ -36,50 +42,34 @@ public class Album : EntityBase
 
     public void AddSong(int songId)
     {
-        if (_songs.Any(x => x.SongId == songId))
-        {
-            throw new InvalidOperationException(
-                $"There is already song with id {songId} in album");
-        }
-        _songs.Add(new(Id, songId));
+        var adding = new AlbumSong(Id, songId);
+        ListGuard.CannotAddDublicate(_songs, adding);
+        _songs.Add(adding);
     }
 
 
     public void RemoveSong(int songId)
     {
-        if (_songs.Count == 1)
-        {
-            throw new InvalidOperationException("Unable to remove song " +
-                "because album can't contains no songs");
-        }
-        if (!_songs.Any(x => x.SongId == songId))
-        {
-            throw new InvalidOperationException(
-                $"There is no song with id {songId}");
-        }
-        _songs.Remove(_songs.First(x => x.SongId == songId));
+        var removing = new AlbumSong(Id, songId);
+        ListGuard.CannotBeEmptyAfterRemove(_songs);
+        ListGuard.CannotRemoveNonexistent(_songs, removing);
+        _songs.Remove(removing);
     }
 
 
     public void AddArtist(int artistId)
     {
-        if (_artists.Any(x => x.ArtistId == artistId))
-        {
-            throw new InvalidOperationException(
-                $"There is already artist with id {artistId} in album");
-        }
-        _artists.Add(new(Id, artistId));
+        var adding = new AlbumArtist(Id, artistId);
+        ListGuard.CannotAddDublicate(_artists, adding);
+        _artists.Add(adding);
     }
 
 
     public void RemoveArtist(int artistId)
     {
-        if (!_artists.Any(x => x.ArtistId == artistId))
-        {
-            throw new InvalidOperationException(
-                $"There is no artist with id {artistId}");
-        }
-        _artists.Remove(_artists.First(x => x.ArtistId == artistId));
+        var removing = new AlbumArtist(Id, artistId);
+        ListGuard.CannotRemoveNonexistent(_artists, removing);
+        _artists.Remove(removing);
     }
 }
 

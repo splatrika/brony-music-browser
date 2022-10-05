@@ -13,6 +13,14 @@ public class AlbumSong
     }
 
 
-    private AlbumSong() { } //Required by EF
+    public override bool Equals(object? obj)
+    {
+        if (obj is AlbumSong song)
+        {
+            return song.AlbumId == AlbumId &&
+                song.SongId == SongId;
+        }
+        return base.Equals(obj);
+    }
 }
 

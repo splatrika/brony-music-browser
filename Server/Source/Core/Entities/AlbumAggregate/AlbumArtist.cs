@@ -13,6 +13,14 @@ public class AlbumArtist
     }
 
 
-    private AlbumArtist() { } //Required by EF Core
+    public override bool Equals(object? obj)
+    {
+        if (obj is AlbumArtist artist)
+        {
+            return artist.AlbumId == AlbumId &&
+                artist.ArtistId == ArtistId;
+        }
+        return base.Equals(obj);
+    }
 }
 
