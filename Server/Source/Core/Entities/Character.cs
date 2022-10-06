@@ -1,10 +1,11 @@
 ﻿using Ardalis.GuardClauses;
+using Splatrika.BronyMusicBrowser.Core.Interfaces;
 
 namespace Splatrika.BronyMusicBrowser.Core.Entities;
 
 #nullable disable
 
-public class Character : EntityBase
+public class Character : EntityBase, IAggregationRoot
 {
     public string Name { get; private set; }
     public string Icon { get; private set; }

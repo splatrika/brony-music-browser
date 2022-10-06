@@ -1,16 +1,17 @@
 ﻿using Ardalis.GuardClauses;
+using Splatrika.BronyMusicBrowser.Core.Interfaces;
 
 namespace Splatrika.BronyMusicBrowser.Core.Entities;
 
 #nullable disable
 
-public class Genre : EntityBase
+public class Genre : EntityBase, IAggregationRoot
 {
     public string Caption { get; private set; }
     public int Order { get; private set; }
 
 
-    public Genre(int id, string caption, int order) : base(id)
+    public Genre(int id, string caption, int order = 0) : base(id)
     {
         UpdateDetails(caption, order);
     }

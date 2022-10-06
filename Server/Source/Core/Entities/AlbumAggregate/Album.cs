@@ -1,10 +1,11 @@
 ﻿using Ardalis.GuardClauses;
+using Splatrika.BronyMusicBrowser.Core.Interfaces;
 
 namespace Splatrika.BronyMusicBrowser.Core.Entities.AlbumAggregate;
 
 #nullable disable
 
-public class Album : EntityBase
+public class Album : EntityBase, IAggregationRoot
 {
     public string Title { get; private set; }
     public string Cover { get; private set; }
