@@ -63,8 +63,8 @@ public abstract class EfCrudRepositoryBase<TEntity, TCreateArgs, TContext>
     {
         var items = await _context.Set<TEntity>()
             .AsNoTracking()
-            .Take(count)
             .Skip(offset)
+            .Take(count)
             .ToListAsync();
 
         foreach (var item in items)
