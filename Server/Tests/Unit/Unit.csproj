@@ -34,7 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Core\Core.csproj" />
-    <ProjectReference Include="..\Integration\Integration.csproj" />
     <ProjectReference Include="..\..\Source\WebAdmin\WebAdmin.csproj" />
     <ProjectReference Include="..\..\Source\WebApi\WebApi.csproj" />
     <ProjectReference Include="..\..\Source\Infrastructure\Infrastructure.csproj" />

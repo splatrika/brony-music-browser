@@ -38,6 +38,7 @@
     <ProjectReference Include="..\..\Source\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\..\Source\WebAdmin\WebAdmin.csproj" />
     <ProjectReference Include="..\..\Source\WebApi\WebApi.csproj" />
+    <ProjectReference Include="..\Unit\Unit.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
