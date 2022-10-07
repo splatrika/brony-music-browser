@@ -52,5 +52,21 @@ public static class Dependencies
         services.AddScoped<IFilterProcessorsProvider<Song, SongFilters>,
             SongFilterProcessorsProvider>();
     }
+
+
+    public static void AddReadOnlyRepositories(
+        this IServiceCollection services)
+    {
+        services.AddScoped<
+            IReadOnlyRepository<ArtistInfo>, ReadOnlyArtistRepository>();
+        services.AddScoped<
+            IReadOnlyRepository<CharacterInfo>, ReadOnlyCharacterRepository>();
+        services.AddScoped<
+            IReadOnlyRepository<GenreInfo>, ReadOnlyGenreRepository>();
+        services.AddScoped<
+            IReadOnlySongRepository, ReadOnlySongRepository>();
+        services.AddScoped<
+            IReadOnlyAlbumRepository, ReadOnlyAlbumRepository>();
+    }
 }
 
