@@ -27,6 +27,9 @@ public class Song : EntityBase, IAggregationRoot
         : base(id)
     {
         UpdateDetails(title, year, youTubeId, cover);
+        _artists = new();
+        _genres = new();
+        _characters = new();
     }
 
 
@@ -35,7 +38,7 @@ public class Song : EntityBase, IAggregationRoot
     {
         Title = Guard.Against.NullOrEmpty(title);
         Year = Guard.Against.Negative(year);
-        YouTubeId = Title = Guard.Against.NullOrEmpty(youTubeId);
+        YouTubeId = Guard.Against.NullOrEmpty(youTubeId);
         Cover = cover;
     }
 
