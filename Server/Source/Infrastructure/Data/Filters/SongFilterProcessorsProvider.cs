@@ -5,15 +5,15 @@ using Splatrika.BronyMusicBrowser.Core.Interfaces;
 
 namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Filters;
 
-public class SongFilterProcessorProvider
+public class SongFilterProcessorsProvider
     : IFilterProcessorsProvider<Song, SongFilters>
 {
     private List<IFilterProcessor<Song, SongFilters>> _filters;
 
 
-    public SongFilterProcessorProvider(IServiceProvider provider)
+    public SongFilterProcessorsProvider(IServiceProvider provider)
     {
-        var assembly = typeof(SongFilterProcessorProvider).Assembly;
+        var assembly = typeof(SongFilterProcessorsProvider).Assembly;
 
         var filterTypes = assembly.GetTypes()
             .Where(x =>
