@@ -45,5 +45,12 @@ public static class Dependencies
         services.AddScoped<
             ICrudRepository<Album, AlbumCreateArgs>, AlbumCrudRepository>();
     }
+
+
+    public static void AddFilterProcessors(this IServiceCollection services)
+    {
+        services.AddScoped<IFilterProcessorsProvider<Song, SongFilters>,
+            SongFilterProcessorsProvider>();
+    }
 }
 
