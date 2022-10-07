@@ -12,6 +12,7 @@
     <None Remove="Microsoft.Extensions.Configuration.Abstractions" />
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Data\Repositories\" />
+    <None Remove="Data\Repositories\ReadOnly\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
@@ -26,6 +27,7 @@
     <Folder Include="Data\" />
     <Folder Include="Data\Configuration\" />
     <Folder Include="Data\Repositories\" />
+    <Folder Include="Data\Repositories\ReadOnly\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
