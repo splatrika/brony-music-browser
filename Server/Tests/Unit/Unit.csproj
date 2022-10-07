@@ -28,6 +28,7 @@
     <None Remove="Moq" />
     <None Remove="Core\" />
     <None Remove="Core\Entities\" />
+    <None Remove="Core\Builders\" />
     <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
@@ -40,5 +41,6 @@
   <ItemGroup>
     <Folder Include="Core\" />
     <Folder Include="Core\Entities\" />
+    <Folder Include="Core\Builders\" />
   </ItemGroup>
 </Project>
