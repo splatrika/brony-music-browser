@@ -1,6 +1,9 @@
-﻿namespace Splatrika.BronyMusicBrowser.Core.Entities.ReadOnly;
+﻿using Splatrika.BronyMusicBrowser.Core.Entities;
+using Splatrika.BronyMusicBrowser.Core.Interfaces;
 
-public class CharacterInfo : EntityBase
+namespace Splatrika.BronyMusicBrowser.Core.Projections;
+
+public class CharacterInfo : EntityBase, IReadOnlyProjection
 {
     public string Name { get; private set; }
     public string Icon { get; private set; }
