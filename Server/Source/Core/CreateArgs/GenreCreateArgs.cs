@@ -6,7 +6,7 @@ public class GenreCreateArgs
     public int Order { get; set; }
 
 
-    public GenreCreateArgs(string caption, int order)
+    public GenreCreateArgs(string caption, int order = 0)
     {
         Caption = caption;
         Order = order;
