@@ -61,7 +61,7 @@ public class ReadOnlySongRepository
         var currentQuery = query;
         foreach (var processor in processors)
         {
-            currentQuery = processor.ApplyFilter(query, filters);
+            currentQuery = processor.ApplyFilter(currentQuery, filters);
         }
         return currentQuery;
     }
