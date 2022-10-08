@@ -11,6 +11,7 @@ using Splatrika.BronyMusicBrowser.Infrastructure.Data.Repositories;
 using Splatrika.BronyMusicBrowser.Core.Entities;
 using Splatrika.BronyMusicBrowser.Core;
 using Splatrika.BronyMusicBrowser.Infrastructure.Data.Filters;
+using Splatrika.BronyMusicBrowser.Core.Projections.AlbumAggregate;
 
 namespace Splatrika.BronyMusicBrowser.Infrastructure;
 
@@ -27,7 +28,8 @@ public static class Dependencies
                 "Set ConnectionStrings:BrowserConnection in configuration");
         }
         services.AddDbContext<BrowserContext>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseSqlServer(connectionString)
+                   .EnableSensitiveDataLogging());
     }
 
 
@@ -64,7 +66,11 @@ public static class Dependencies
         services.AddScoped<
             IReadOnlyRepository<GenreInfo>, ReadOnlyGenreRepository>();
         services.AddScoped<
+            IReadOnlyRepository<SongInfo>, ReadOnlySongRepository>();
+        services.AddScoped<
             IReadOnlySongRepository, ReadOnlySongRepository>();
+        services.AddScoped<
+            IReadOnlyRepository<AlbumInfo>, ReadOnlyAlbumRepository>();
         services.AddScoped<
             IReadOnlyAlbumRepository, ReadOnlyAlbumRepository>();
     }
