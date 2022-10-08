@@ -14,6 +14,8 @@ public interface ICrudRepository<TEntity, TCreateArgs>
 
     Task<bool> Contains(int id);
 
+    Task<bool> Any();
+
     Task<List<TEntity>> GetAll(int id, int count, int offset);
 }
 

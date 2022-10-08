@@ -34,6 +34,12 @@ public abstract class EfCrudRepositoryBase<TEntity, TCreateArgs, TContext>
     }
 
 
+    public async Task<bool> Any()
+    {
+        return await _context.Set<TEntity>().AnyAsync();
+    }
+
+
     public async Task Delete(int id)
     {
         await CheckContains(id);
