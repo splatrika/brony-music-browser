@@ -22,5 +22,11 @@ public class AlbumArtist
         }
         return base.Equals(obj);
     }
+
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(AlbumId.GetHashCode(), ArtistId.GetHashCode());
+    }
 }
 

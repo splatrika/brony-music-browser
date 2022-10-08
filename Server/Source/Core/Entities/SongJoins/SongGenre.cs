@@ -13,5 +13,22 @@ public class SongGenre
         SongId = songId;
         GenreId = genreId;
     }
+
+
+    public override bool Equals(object obj)
+    {
+        if (obj is SongGenre genre)
+        {
+            return genre.SongId == SongId &&
+                genre.GenreId == GenreId;
+        }
+        return base.Equals(obj);
+    }
+
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(SongId.GetHashCode(), GenreId.GetHashCode());
+    }
 }
 

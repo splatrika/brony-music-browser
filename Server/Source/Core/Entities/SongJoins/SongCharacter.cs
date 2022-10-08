@@ -13,5 +13,23 @@ public class SongCharacter
         SongId = songId;
         CharacterId = characterId;
     }
+
+
+    public override bool Equals(object obj)
+    {
+        if (obj is SongCharacter character)
+        {
+            return character.SongId == SongId &&
+                character.CharacterId == CharacterId;
+        }
+        return base.Equals(obj);
+    }
+
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(SongId.GetHashCode(),
+            CharacterId.GetHashCode());
+    }
 }
 
