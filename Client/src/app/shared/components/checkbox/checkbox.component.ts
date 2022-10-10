@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
 })
 export class CheckboxComponent implements OnInit {
   @Input()
-  control!: FormControl;
+  control!: FormControl<boolean>;
 
   @Input()
   caption!: string;

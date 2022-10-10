@@ -32,7 +32,8 @@ describe('CheckboxComponent', () => {
   });
 
   it('form control should be assigned to input', () => {
-    let control = new FormControl<boolean>(false);
+    let control = 
+      new FormControl<boolean>(false) as FormControl<boolean>;
     component.control = control;
     fixture.detectChanges();
 
