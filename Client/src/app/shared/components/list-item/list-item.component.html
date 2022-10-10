@@ -1,0 +1,13 @@
+<div class="list-item">
+    <div class="horizontal-wrapper">
+        <div class="vertical-wrapper main">
+            <h5 class="item-title primary">{{ title }}</h5>
+            <h5 class="item-title secondary">
+                <ng-content select="[secondary]"></ng-content>
+            </h5>
+        </div>
+        <div class="item-buttons horizontal-wrapper">
+            <ng-content select="[buttons]"></ng-content>
+        </div>
+    </div>
+</div>
