@@ -1,0 +1,162 @@
+@use "./reset.scss";
+
+$padding-base: 32px;
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.side-down-button {
+    border: 2px solid black;
+    background: none;
+    padding: $padding-base * 0.5;
+    width: 100%;
+    font-weight: bold;
+    margin-top: $padding-base * 0.5;
+    &:hover {
+        background: black;
+        color: white;
+    }
+    &:active {
+        opacity: 0.5;
+    }
+}
+
+.group-title {
+    font-weight: bold;
+}
+
+.item-title {
+    font-weight: bold;
+    & + .secondary {
+        font-weight: 400;
+    }
+}
+
+.link-style {
+    color: black;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0;
+    &:active {
+        opacity: 0.5;
+    }
+}
+
+.checkbox {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-image: url("/img/Checkbox.png");
+    &:checked {
+        background-image: url("/img//Selected.png");
+    }
+}
+
+.pony-checkbox {
+    appearance: none;
+    width: $padding-base;
+    height: $padding-base;
+    background: none;
+    background-color: black;
+    border-radius: $padding-base;
+    opacity: 0.5;
+    &:hover {
+        opacity: 0.6;
+    }
+    &:checked {
+        background: none;
+        background-color: black;
+        opacity: 1;
+    }
+    &:checked + &:hover {
+        opacity: 0.9;
+    }
+}
+
+.text-input {
+    padding: $padding-base * 0.5;
+    background: none;
+    border: 2px solid black;
+    font-weight: bold;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.select {
+    width: 100%;
+    appearance: none;
+    border: none;
+    background: none;
+    padding: $padding-base * 0.25;
+    border-radius: 0;
+}
+
+.scroll {
+    overflow: scroll;
+}
+
+.o-hidden {
+    overflow: hidden;
+}
+
+.o-hidden-x {
+    overflow-x: hidden;
+}
+
+.o-hidden-y {
+    overflow-y: hidden;
+}
+
+.o-auto {
+    overflow: auto;
+}
+
+.o-auto-x {
+    overflow-x: auto;
+}
+
+.o-auto-y {
+    overflow-y: auto;
+}
+
+@mixin elements-color($background, $accent, $regular, $accent2) {
+    background-color: $background;
+    color: $regular;
+    .side-down-button {
+        border-color: $accent2;
+        color: $accent2;
+        &:hover {
+            background-color: $accent2;
+            color: $background;
+        }
+        &:active {
+            opacity: 0.5;
+        }
+    }
+    .group-title {
+        color: $accent;
+    }
+    .item-title {
+        color: $regular;
+    }
+    .text-input {
+        border-color: $accent;
+        color: $accent;
+        &::placeholder {
+            color: $accent;
+            opacity: 0.5;
+        }
+    }
+    .link-style {
+        color: inherit;
+    }
+    .select {
+        color: $regular;
+    }
+}
+
+// TODO input
