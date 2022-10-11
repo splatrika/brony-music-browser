@@ -6,11 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { GenresComponent } from './components/genres/genres.component';
 import { CharactersComponent } from './components/characters/characters.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 @NgModule({
   declarations: [
     GenresComponent,
-    CharactersComponent
+    CharactersComponent,
+    SearchFormComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,8 @@ import { CharactersComponent } from './components/characters/characters.componen
     CoreModule,
     SharedModule
   ],
-  exports: []
+  exports: [
+    SearchFormComponent
+  ]
 })
 export class SearchFormModule { }

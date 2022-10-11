@@ -1,0 +1,9 @@
+<form [formGroup]="form" class="vertical-wrapper h-100 o-hidden">
+    <input type="text" formControlName="searchString" 
+        class="side-group text-input" placeholder="search...">
+    <div class="main scroll">
+        <characters formControlName="characters"></characters>
+        <genres formControlName="genres"></genres>
+    </div>
+    <button class="side-down-button" (click)="onSearchClick()">Search</button>
+</form>
