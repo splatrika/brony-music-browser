@@ -4,10 +4,12 @@ import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
+import { GenresComponent } from './components/genres/genres.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    GenresComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

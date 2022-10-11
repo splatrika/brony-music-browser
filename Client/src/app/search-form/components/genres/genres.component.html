@@ -1,0 +1,7 @@
+<group title="genres">
+    <list-select-control [formControl]="formControl">
+        <ng-template let-genre let-boolControl="boolControl">
+            <checkbox [caption]="genre.caption" [control]="boolControl"></checkbox>
+        </ng-template>
+    </list-select-control>
+</group>
