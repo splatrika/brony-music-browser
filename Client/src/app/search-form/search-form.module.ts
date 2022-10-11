@@ -5,10 +5,12 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { GenresComponent } from './components/genres/genres.component';
+import { CharactersComponent } from './components/characters/characters.component';
 
 @NgModule({
   declarations: [
-    GenresComponent
+    GenresComponent,
+    CharactersComponent
   ],
   imports: [
     CommonModule,
