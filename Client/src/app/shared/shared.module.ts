@@ -7,6 +7,8 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { PonyCheckboxComponent } from './components/pony-checkbox/pony-checkbox.component';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { ItemButtonComponent } from './components/item-button/item-button.component';
+import { ListSelectControlComponent } from './components/list-select-control/list-select-control.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -14,18 +16,21 @@ import { ItemButtonComponent } from './components/item-button/item-button.compon
     CheckboxComponent,
     PonyCheckboxComponent,
     ListItemComponent,
-    ItemButtonComponent
+    ItemButtonComponent,
+    ListSelectControlComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ],
   exports: [
     GroupComponent,
     CheckboxComponent,
     PonyCheckboxComponent,
     ListItemComponent,
-    ItemButtonComponent
+    ItemButtonComponent,
+    ListSelectControlComponent
   ]
 })
 export class SharedModule { }
