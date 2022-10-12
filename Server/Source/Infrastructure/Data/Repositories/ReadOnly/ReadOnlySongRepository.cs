@@ -29,6 +29,9 @@ public class ReadOnlySongRepository
         int count, int offset)
     {
         var items = await ApplyFilters(_context.Songs, filters)
+            .Include(e => e.Artists)
+            .Include(e => e.Characters)
+            .Include(e => e.Genres)
             .Skip(offset)
             .Take(count)
             .ToListAsync();
