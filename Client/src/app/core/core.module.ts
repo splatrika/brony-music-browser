@@ -8,6 +8,7 @@ import { GenresService } from './services/data/genres.service';
 import { SongsService } from './services/data/songs.service';
 import { AlbumsService } from './services/data/albums.service';
 import { PlayerService } from './services/player.service';
+import { PinsService } from './services/pins.service';
 
 @NgModule({
   declarations: [],
@@ -21,7 +22,8 @@ import { PlayerService } from './services/player.service';
     GenresService,
     SongsService,
     AlbumsService,
-    PlayerService
+    PlayerService,
+    PinsService
   ]
 })
 export class CoreModule { }
