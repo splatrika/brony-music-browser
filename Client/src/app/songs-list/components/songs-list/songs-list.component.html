@@ -1,0 +1,6 @@
+<ng-template [ngIf]="getState() != 'error'">
+    <song-item *ngFor="let s of songs" [song]="s"></song-item>
+    <span class="sad" *ngIf="isNotFound()">No songs found</span>
+    <span *ngIf="getState() == 'loading'">Loading...</span>
+</ng-template>
+<span *ngIf="getState() == 'error'">The service is temporary unavaible</span>

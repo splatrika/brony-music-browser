@@ -1,0 +1,12 @@
+<list-item class="song-item" [title]="song.title">
+    <img class="cover" [src]="song.cover" icon>
+    <span secondary>
+        <span class="secondary-item" *ngFor="let a of artists">{{ a.name }}</span>
+        <span class="secondary-item secondary-2" *ngFor="let g of genres">{{ g.caption }}</span>
+        <span class="secondary-item secondary-2" *ngIf="album">{{ album.title }}</span>
+    </span>
+    <item-button iconUrl="/assets/img/PlayDark.png" 
+        (clicked)="onPlayClick()" buttons class="playButton"></item-button>
+    <item-button iconUrl="/assets/img/PinDark.png" 
+        (clicked)="onPinClick()" buttons class="pinButton"></item-button>
+</list-item>
