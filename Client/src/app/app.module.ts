@@ -8,6 +8,7 @@ import { SearchFormModule } from './search-form/search-form.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { SongsListModule } from './songs-list/songs-list.module';
+import { PlayerModule } from './player/player.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SongsListModule } from './songs-list/songs-list.module';
     CoreModule,
     SearchFormModule,
     SongsListModule,
+    PlayerModule,
     AppRoutingModule
   ],
   providers: [],
