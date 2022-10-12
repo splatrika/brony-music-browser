@@ -8,6 +8,7 @@ import { ListItemComponent } from './list-item.component';
   selector: 'test',
   template: `
     <list-item>
+      <span icon>picture</span>
       <span secondary>Brony musician</span>
       <button buttons>More info</button>
     </list-item>
@@ -49,7 +50,7 @@ describe('ListItemComponent', () => {
     expect(titleElement?.innerHTML).toEqual('EnergyTone');
   });
 
-  it('should project the secondary', () => {
+  it('should project a secondary', () => {
     let secondaryContainer = testFixture.debugElement
       .query(By.css('list-item'))
       .query(By.css('.secondary'))
@@ -58,12 +59,21 @@ describe('ListItemComponent', () => {
       .toContain('Brony musician');
   });
 
-  it('should project the buttons', () => {
+  it('should project a buttons', () => {
     let buttonsContainer = testFixture.debugElement
       .query(By.css('list-item'))
       .query(By.css('.item-buttons'))
       .nativeElement as HTMLElement;
     expect(buttonsContainer.innerHTML)
       .toContain('More info');
+  });
+
+  it('should project an icon', () => {
+    let buttonsContainer = testFixture.debugElement
+      .query(By.css('list-item'))
+      .query(By.css('.icon'))
+      .nativeElement as HTMLElement;
+    expect(buttonsContainer.innerHTML)
+      .toContain('picture');
   });
 });
