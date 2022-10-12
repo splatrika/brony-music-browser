@@ -44,6 +44,7 @@ describe('SongsService', () => {
         id: 1,
         title: 'The Magic Flicker',
         cover: '/cover1.png',
+        youTubeId: '123',
         year: 2018,
         artists: [4],
         characters: [87],
