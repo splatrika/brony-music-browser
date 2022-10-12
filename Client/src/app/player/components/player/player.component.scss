@@ -1,0 +1,12 @@
+.player-container {
+    overflow: hidden;
+}
+
+.hidden-player {
+    height: 0px;
+    transition: 0.25s;
+}
+
+.showed-player {
+    transition: 0.25s;
+}

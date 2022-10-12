@@ -1,0 +1,13 @@
+<div class="player-container"
+    [ngClass]="{'hidden-player' : !hasSongToPlay(), 'showed-player': hasSongToPlay()}">
+    <iframe
+        *ngIf="hasSongToPlay()"
+        class="player"
+        id="ytplayer"
+        type="text/html"
+        width="640"
+        height="360"
+        [src]="player"
+        frameborder="0"
+    ></iframe>
+</div>
