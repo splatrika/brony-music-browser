@@ -50,9 +50,9 @@ body {
     appearance: none;
     width: 16px;
     height: 16px;
-    background-image: url("/img/Checkbox.png");
+    background-image: url("/assets/img/Checkbox.png");
     &:checked {
-        background-image: url("/img//Selected.png");
+        background-image: url("/assets/img//Selected.png");
     }
 }
 
