@@ -1,4 +1,14 @@
-<h1>BronyMusicBrowser</h1>
-<h2>It works!</h2>
+<div class="root-wrapper horizontal-wrapper">
+    <div class="side-bar side-pins black"></div>
+    <div class="side-bar side-filters light o-hidden">
+        <div class="vertical-wrapper h-100 o-hidden">
+            <search-form class="vertical-wrapper sidebar-content h-100 o-hidden"
+                (submitted)="onSearchSubmitted($event)"></search-form>
+        </div>
+    </div>
+    <div class="main">
+        <songs-list [specification]="songListSpecification"></songs-list>
+    </div>
+</div>
 
 <router-outlet></router-outlet>
