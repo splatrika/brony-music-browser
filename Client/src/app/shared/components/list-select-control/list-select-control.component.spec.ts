@@ -1,8 +1,9 @@
-import { Component, ComponentRef } from '@angular/core';
+import { Component, ComponentRef, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { SimpleResourceServiceBase } from 'src/app/core/services/data/simple-resources.service.base';
+import { ShowMoreService } from 'src/app/core/services/show-more.service';
 
 import { ListSelectControlComponent } from './list-select-control.component';
 
@@ -32,6 +33,9 @@ describe('ListSelectControlComponent', () => {
     }
   }
 
+  @Injectable()
+  class MockShowMoreService {}
+
   let component: ListSelectControlComponent;
   let testFixture: ComponentFixture<TestComponent>;
 
@@ -42,6 +46,10 @@ describe('ListSelectControlComponent', () => {
         {
           provide: SimpleResourceServiceBase<any>,
           useClass: MockDataSetvice,
+        },
+        {
+          provide: ShowMoreService,
+          useClass: MockShowMoreService,
         },
       ],
     }).compileComponents();
