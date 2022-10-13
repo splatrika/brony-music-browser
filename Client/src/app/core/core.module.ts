@@ -9,13 +9,11 @@ import { SongsService } from './services/data/songs.service';
 import { AlbumsService } from './services/data/albums.service';
 import { PlayerService } from './services/player.service';
 import { PinsService } from './services/pins.service';
+import { ShowMoreService } from './services/show-more.service';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    HttpClientModule
-  ],
+  imports: [CommonModule, HttpClientModule],
   providers: [
     ArtistsService,
     CharactersService,
@@ -23,7 +21,8 @@ import { PinsService } from './services/pins.service';
     SongsService,
     AlbumsService,
     PlayerService,
-    PinsService
-  ]
+    PinsService,
+    ShowMoreService,
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}
