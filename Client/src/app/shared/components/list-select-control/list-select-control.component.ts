@@ -1,6 +1,21 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  ContentChild,
+  Input,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { Character } from 'src/app/core/models/character.model';
 import { SimpleResourceServiceBase } from 'src/app/core/services/data/simple-resources.service.base';
+import {
+  ShowMoreContext,
+  ShowMoreService,
+} from 'src/app/core/services/show-more.service';
 
 type State = 'loading' | 'complete' | 'error';
 
@@ -11,29 +26,44 @@ type State = 'loading' | 'complete' | 'error';
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: ListSelectControlComponent
+      useExisting: ListSelectControlComponent,
     },
-  ]
+  ],
 })
-export class ListSelectControlComponent implements OnInit, ControlValueAccessor {
+export class ListSelectControlComponent
+  implements OnInit, ControlValueAccessor
+{
   @Input()
   defaultCount = 10;
+
+  @Input()
+  captionView = (x: any) => x.toString();
+
+  @Input()
+  resourceName = '';
 
   @ContentChild(TemplateRef)
   templateRef!: TemplateRef<any>;
 
-  constructor(private service: SimpleResourceServiceBase<any>) { }
+  constructor(
+    private service: SimpleResourceServiceBase<any>,
+    private showMoreService: ShowMoreService
+  ) {}
 
-  items: any[] = []
-  
+  items: any[] = [];
+
   private controls = new Map<number, FormControl<boolean>>();
-  private selectedItems: any[] = []
+  private selectedItems: any[] = [];
   private isDisabled = false;
-  private onChange = (i: any[]) => {}
-  private state: State = 'loading'
+  private onChange = (i: any[]) => {};
+  private state: State = 'loading';
 
   getState(): State {
-    return this.state
+    return this.state;
+  }
+
+  isItemsEnough(): boolean {
+    return this.items.length < this.defaultCount;
   }
 
   getSelectedItems(): number[] {
@@ -41,24 +71,23 @@ export class ListSelectControlComponent implements OnInit, ControlValueAccessor 
     return cloned;
   }
 
-  getControl(itemId : number): FormControl<boolean> {
+  getControl(itemId: number): FormControl<boolean> {
     return this.controls.get(itemId) as FormControl<boolean>;
   }
 
   ngOnInit(): void {
-    this.service.getMany(this.defaultCount, 0)
-      .subscribe({
-        next: n => n.forEach(x => this.addItem(x)),
-        error: e => { 
-          this.state = 'error'
-          console.error(e);
-        },
-        complete: () => this.state = 'complete'
-      });
+    this.service.getMany(this.defaultCount, 0).subscribe({
+      next: (n) => n.forEach((x) => this.addItem(x)),
+      error: (e) => {
+        this.state = 'error';
+        console.error(e);
+      },
+      complete: () => (this.state = 'complete'),
+    });
   }
 
   writeValue(obj: any): void {
-    this.controls.forEach(c => c.setValue(false));
+    this.controls.forEach((c) => c.setValue(false));
     for (let itemId of obj) {
       if (!this.controls.has(itemId)) {
         console.warn(`There is no genre with id ${itemId}`);
@@ -77,11 +106,21 @@ export class ListSelectControlComponent implements OnInit, ControlValueAccessor 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
     if (isDisabled) {
-      this.controls.forEach(x => x.disable())
+      this.controls.forEach((x) => x.disable());
+    } else {
+      this.controls.forEach((x) => x.enable());
     }
-    else {
-      this.controls.forEach(x => x.enable());
-    }
+  }
+
+  onShowMoreClick() {
+    let context: ShowMoreContext<Character> = {
+      dataService: this.service,
+      addCallback: (x) => this.addItem(x),
+      captionGetter: (x) => this.captionView(x),
+      addedIds: this.items.map((x) => x.id),
+      resourceName: this.resourceName,
+    };
+    this.showMoreService.runModal(context);
   }
 
   private addItem(item: any) {
@@ -91,20 +130,17 @@ export class ListSelectControlComponent implements OnInit, ControlValueAccessor 
     if (this.isDisabled) {
       control.disable();
     }
-    control.valueChanges.subscribe(x => this.onValueChange(item.id, x));
-
+    control.valueChanges.subscribe((x) => this.onValueChange(item.id, x));
   }
 
   private onValueChange(itemId: number, value: boolean) {
-    let itemIndex = this.selectedItems.indexOf((itemId))
+    let itemIndex = this.selectedItems.indexOf(itemId);
     if (value && itemIndex == -1) {
       this.selectedItems.push(itemId);
-    }
-    else if (!value && itemId != -1) {
+    } else if (!value && itemId != -1) {
       this.selectedItems.splice(itemIndex, 1);
     }
     let cloned = Object.assign([], this.selectedItems);
     this.onChange(cloned);
   }
-
 }

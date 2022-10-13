@@ -1,8 +1,20 @@
 <span *ngIf="getState() == 'loading'">loading...</span>
 <span *ngIf="getState() == 'error'">The sevice temporary unavaible</span>
 <ng-template [ngIf]="getState() == 'complete'">
-    <ng-container *ngFor="let item of items"
-        [ngTemplateOutlet]="templateRef"
-        [ngTemplateOutletContext]="{ $implicit: item, boolControl: getControl(item.id)}">
-    </ng-container>
+  <ng-container
+    *ngFor="let item of items"
+    [ngTemplateOutlet]="templateRef"
+    [ngTemplateOutletContext]="{
+      $implicit: item,
+      boolControl: getControl(item.id)
+    }"
+  >
+  </ng-container>
+  <button
+    *ngIf="!isItemsEnough()"
+    class="link-style"
+    (click)="onShowMoreClick()"
+  >
+    show more...
+  </button>
 </ng-template>

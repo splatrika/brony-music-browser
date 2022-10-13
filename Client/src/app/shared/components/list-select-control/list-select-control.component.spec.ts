@@ -7,13 +7,9 @@ import { SimpleResourceServiceBase } from 'src/app/core/services/data/simple-res
 import { ListSelectControlComponent } from './list-select-control.component';
 
 describe('ListSelectControlComponent', () => {
-  const testValues: any[] = [
-    {id: 10},
-    {id: 12},
-    {id: 14}
-  ]
+  const testValues: any[] = [{ id: 10 }, { id: 12 }, { id: 14 }];
   let requestedCount = 0;
-  
+
   @Component({
     template: `
       <list-select-control>
@@ -22,17 +18,17 @@ describe('ListSelectControlComponent', () => {
           <input id="item-{{ item.id }}" [formControl]="boolControl" />
         </ng-template>
       </list-select-control>
-    `
+    `,
   })
   class TestComponent {}
-  
+
   class MockDataSetvice {
     getMany(count: number, offset: number): Observable<any> {
       requestedCount = count;
-      return new Observable(subscriber => {
+      return new Observable((subscriber) => {
         subscriber.next(testValues);
         subscriber.complete();
-      })
+      });
     }
   }
 
@@ -41,16 +37,17 @@ describe('ListSelectControlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListSelectControlComponent, TestComponent ], // add test component
-      providers: [ {
-        provide: SimpleResourceServiceBase<any>, 
-        useClass: MockDataSetvice} ]
-    })
-    .compileComponents();
+      declarations: [ListSelectControlComponent, TestComponent], // add test component
+      providers: [
+        {
+          provide: SimpleResourceServiceBase<any>,
+          useClass: MockDataSetvice,
+        },
+      ],
+    }).compileComponents();
 
     testFixture = TestBed.createComponent(TestComponent);
-    component = testFixture.debugElement
-      .query(By.css('list-select-control'))
+    component = testFixture.debugElement.query(By.css('list-select-control'))
       .componentInstance as ListSelectControlComponent;
     component.defaultCount = 5;
     testFixture.detectChanges();
@@ -68,8 +65,8 @@ describe('ListSelectControlComponent', () => {
   });
 
   it('should call onChange with updated selections after value has changed', () => {
-    let updated: number[] = []
-    component.registerOnChange((c: number[]) => updated = c);
+    let updated: number[] = [];
+    component.registerOnChange((c: number[]) => (updated = c));
     component.getControl(12).setValue(true);
     expect(updated).toEqual([12]);
     component.getControl(10).setValue(true);
@@ -88,8 +85,7 @@ describe('ListSelectControlComponent', () => {
   });
 
   it('should project checkboxes', () => {
-    let element = testFixture.debugElement
-      .query(By.css('list-select-control'))
+    let element = testFixture.debugElement.query(By.css('list-select-control'))
       .nativeElement as HTMLElement;
     let inputElement = element.querySelector('#item-12');
     expect(inputElement).toBeTruthy();
@@ -97,5 +93,23 @@ describe('ListSelectControlComponent', () => {
 
   it('should pass defaultCount to request', () => {
     expect(requestedCount).toEqual(5);
-  })
+  });
+
+  it('should show "show more" button if not enough items', () => {
+    component.defaultCount = 2;
+    testFixture.detectChanges();
+
+    let element = testFixture.nativeElement as HTMLElement;
+    let showMoreButton = element.querySelector('button');
+    expect(showMoreButton).toBeTruthy();
+  });
+
+  it('should hide "show more" button if not enough items', () => {
+    component.defaultCount = 20;
+    testFixture.detectChanges();
+
+    let element = testFixture.nativeElement as HTMLElement;
+    let showMoreButton = element.querySelector('button');
+    expect(showMoreButton).not.toBeTruthy();
+  });
 });
