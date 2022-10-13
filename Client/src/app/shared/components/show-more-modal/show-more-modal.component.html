@@ -1,0 +1,21 @@
+<div
+  class="modal-container o-hidden horizontal-wrapper centered"
+  [ngClass]="{ hidden: !context }"
+>
+  <div class="vertical-wrapper centered">
+    <div class="modal vertical-wrapper o-hidden">
+      <div class="title-wrapper horizontal-wrapper">
+        <p class="modal-title main">add {{ context?.resourceName }}</p>
+        <button class="small-button secondary close-button" (click)="close()">
+          close
+        </button>
+      </div>
+      <div class="scroll main">
+        <div *ngFor="let i of items" class="item">
+          <button class="add-item" (click)="add(i.id)">add</button>
+          <span>{{ context?.captionGetter(i) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

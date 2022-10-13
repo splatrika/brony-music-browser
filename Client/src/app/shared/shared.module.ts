@@ -9,6 +9,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import { ItemButtonComponent } from './components/item-button/item-button.component';
 import { ListSelectControlComponent } from './components/list-select-control/list-select-control.component';
 import { CoreModule } from '../core/core.module';
+import { ShowMoreModalComponent } from './components/show-more-modal/show-more-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,20 +18,18 @@ import { CoreModule } from '../core/core.module';
     PonyCheckboxComponent,
     ListItemComponent,
     ItemButtonComponent,
-    ListSelectControlComponent
+    ListSelectControlComponent,
+    ShowMoreModalComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    CoreModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, CoreModule],
   exports: [
     GroupComponent,
     CheckboxComponent,
     PonyCheckboxComponent,
     ListItemComponent,
     ItemButtonComponent,
-    ListSelectControlComponent
-  ]
+    ListSelectControlComponent,
+    ShowMoreModalComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
