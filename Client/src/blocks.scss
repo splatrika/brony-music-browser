@@ -1,111 +1,156 @@
 @import "./reset.scss";
 
 .side-group {
-    .group-title {
-        margin-bottom: 12px;
-    }
-    margin-bottom: $padding-base * 0.75;
-    .checkbox-item {
-        margin-bottom: 4px;
-    }
+  .group-title {
+    margin-bottom: 12px;
+  }
+  margin-bottom: $padding-base * 0.75;
+  .checkbox-item {
+    margin-bottom: 4px;
+  }
 }
 
 .list-item {
-    padding-top: 12px;
-    padding-bottom: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  .item-buttons {
+    display: none;
+  }
+  &:hover {
+    background-color: blue;
     .item-buttons {
-        display: none;
+      display: flex;
     }
-    &:hover {
-        background-color: blue;
-        .item-buttons {
-            display: flex;
-        }
-    }
+  }
 }
 
 .item-button {
-    background: none;
-    color: white;
-    border: none;
-    &:hover {
-        opacity: 0.5;
-    }
-    &:active {
-        transform: scale(0.8);
-    }
+  background: none;
+  color: white;
+  border: none;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:active {
+    transform: scale(0.8);
+  }
 }
 
 .horizontal-wrapper,
 .vertical-weapper {
-    display: flex;
-    flex-wrap: nowrap;
-    .main {
-        flex: 100%;
-    }
+  display: flex;
+  flex-wrap: nowrap;
+  .main {
+    flex: 100%;
+  }
 }
 
 .vertical-wrapper {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .checkbox-item {
-    span {
-        position: relative;
-        top: -2px;
-        margin-left: 4px;
-    }
+  span {
+    position: relative;
+    top: -2px;
+    margin-left: 4px;
+  }
 }
 
 .icon-button {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .pony-list {
-    .pony-checkbox {
-        display: inline-block;
-        margin: 0;
-        margin-left: 2px;
-        margin-top: 2px;
-        position: relative;
-        left: -2px;
-        top: -2px;
-    }
-    .link-style {
-        padding-left: 8px;
-        padding-right: 8px;
-        display: inline-block;
-        position: relative;
-        top: -12px;
-    }
+  .pony-checkbox {
+    display: inline-block;
+    margin: 0;
+    margin-left: 2px;
+    margin-top: 2px;
+    position: relative;
+    left: -2px;
+    top: -2px;
+  }
+  .link-style {
+    padding-left: 8px;
+    padding-right: 8px;
+    display: inline-block;
+    position: relative;
+    top: -12px;
+  }
 }
 
 .select-container {
-    width: 100%;
-    border-radius: 0;
-    border: 2px solid black;
-    box-sizing: border-box;
-    position: relative;
-    .select-arrow {
-        position: absolute;
-        width: 14px;
-        height: 7px;
-        background-image: url("/img/Select.png");
-        background-size: contain;
-        left: 100%;
-        margin-left: -14px - ($padding-base * 0.25);
-        top: 50%;
-        margin-top: -7px * 0.25;
-    }
+  width: 100%;
+  border-radius: 0;
+  border: 2px solid black;
+  box-sizing: border-box;
+  position: relative;
+  .select-arrow {
+    position: absolute;
+    width: 14px;
+    height: 7px;
+    background-image: url("/img/Select.png");
+    background-size: contain;
+    left: 100%;
+    margin-left: -14px - ($padding-base * 0.25);
+    top: 50%;
+    margin-top: -7px * 0.25;
+  }
 }
 
 @mixin block-colors($selection, $border) {
-    .list-item:hover {
-        background-color: $selection;
+  .list-item:hover {
+    background-color: $selection;
+  }
+  .select-container {
+    border-color: $border;
+  }
+}
+
+.modal {
+  background-color: white;
+  width: 200px;
+  height: 400px;
+  padding: $padding-base;
+  .title-wrapper {
+    margin-bottom: $padding-base * 0.5;
+  }
+  .modal-title {
+    font-weight: bold;
+    margin: 0;
+  }
+  .item {
+    margin-bottom: $padding-base * 0.25;
+    button {
+      margin-right: $padding-base * 0.5;
     }
-    .select-container {
-        border-color: $border;
-    }
+  }
+}
+
+.small-button {
+  background: none;
+  border: 2px solid rgb(68, 68, 68);
+  color: rgb(68, 68, 68);
+  padding: 2px;
+  font-weight: bold;
+  &:hover {
+    background-color: rgb(68, 68, 68);
+    color: white;
+  }
+}
+
+.small-button.secondary {
+  border: 2px solid rgb(162, 162, 162);
+  color: rgb(162, 162, 162);
+  &:hover {
+    background-color: rgb(162, 162, 162);
+    color: black;
+  }
+}
+
+.add-item {
+  @extend .small-button;
 }

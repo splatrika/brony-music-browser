@@ -1,79 +1,131 @@
+// @mixin elements-color($background, $accent, $regular, $accent2) {
+//     background-color: $background;
+//     color: $regular;
+//     .side-down-button {
+//         border-color: $accent2;
+//         color: $accent2;
+//         &:hover {
+//             background-color: $accent2;
+//             color: $background;
+//         }
+//         &:active {
+//             opacity: 0.5;
+//         }
+//     }
+//     .group-title {
+//         color: $accent;
+//     }
+//     .item-title {
+//         color: $regular;
+//     }
+// }
 @import "./elements.scss";
 @import "./blocks.scss";
 
 .root-wrapper {
-    height: 100%;
+  height: 100%;
 }
 
 .side-bar {
-    flex: 0 0 256px;
-    width: 256px;
-    box-sizing: border-box;
-    overflow: hidden;
-    .sidebar-content {
-        padding: $padding-base;
-    }
+  flex: 0 0 256px;
+  width: 256px;
+  box-sizing: border-box;
+  overflow: hidden;
+  .sidebar-content {
+    padding: $padding-base;
+  }
 }
 
 .h-100 {
-    height: 100%;
+  height: 100%;
 }
 
 .w-100 {
-    width: 100%;
+  width: 100%;
 }
 
 .black {
-    @include elements-color(#1a181b, #f5e2ff, #efebf1, #d1bedb);
-    @include block-colors(#342a39, #efebf1);
+  @include elements-color(#1a181b, #f5e2ff, #efebf1, #d1bedb);
+  @include block-colors(#342a39, #efebf1);
 }
 
 .light {
-    @include elements-color(#f0eef1, #3d3441, #6e5a78, #661690);
-    @include block-colors(#342a39, #6e5a78);
+  @include elements-color(#f0eef1, #3d3441, #6e5a78, #661690);
+  @include block-colors(#342a39, #6e5a78);
 }
 
 .side-bar {
-    .items-list {
-        position: relative;
-        left: $padding-base * -1;
-        width: 256px;
-        .list-item {
-            padding-left: $padding-base;
-            padding-right: $padding-base;
-        }
-    }
+  .items-list {
+    position: relative;
+    left: $padding-base * -1;
+    width: 256px;
     .list-item {
-        .icon-button {
-            width: $padding-base;
-            height: $padding-base;
-            text-align: center;
-            img {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                top: 2px;
-            }
-        }
+      padding-left: $padding-base;
+      padding-right: $padding-base;
     }
+  }
+  .list-item {
+    .icon-button {
+      width: $padding-base;
+      height: $padding-base;
+      text-align: center;
+      img {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
 }
 
 .player-container {
+  height: 256px;
+  .player {
+    width: 256px;
     height: 256px;
-    .player {
-        width: 256px;
-        height: 256px;
-    }
-    background-color: black;
+  }
+  background-color: black;
 }
 
 .side-pins {
-    .list-item {
-        h5 {
-            color: #9a919e;
-        }
-        &:hover h5 {
-            color: #f0eef1;
-        }
+  .list-item {
+    h5 {
+      color: #9a919e;
     }
+    &:hover h5 {
+      color: #f0eef1;
+    }
+  }
+}
+
+.modal-container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #1a181b79;
+  &.hidden {
+    background: none;
+    pointer-events: none;
+    opacity: 0;
+    .modal {
+      position: relative;
+      transform: scale(0);
+      opacity: 0;
+      transition: 0.5s;
+    }
+    transition: 0.5s;
+  }
+  .modal {
+    transform: scale(1);
+    transition: 0.5s;
+  }
+  transition: 0.5s;
+}
+
+.centered {
+  justify-content: center;
 }
