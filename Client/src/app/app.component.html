@@ -10,8 +10,11 @@
       ></search-form>
     </div>
   </div>
-  <div class="main">
-    <songs-list [specification]="songListSpecification"></songs-list>
+  <div class="main o-hidden">
+    <songs-list
+      class="o-hidden"
+      [specification]="songListSpecification"
+    ></songs-list>
   </div>
 </div>
 <show-more-modal></show-more-modal>
