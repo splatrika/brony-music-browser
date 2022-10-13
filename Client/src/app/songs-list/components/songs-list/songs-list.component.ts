@@ -1,6 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Song } from 'src/app/core/models/song.model';
-import { ArtistsService } from 'src/app/core/services/data/artists.service';
 import { SongsService } from 'src/app/core/services/data/songs.service';
 import { SongListSpecification } from '../../intrefaces/song-list-specification';
 import { AllSongsSpecification } from '../../specifications/all-songs.specification';
@@ -9,18 +14,35 @@ type State = 'loading' | 'complete' | 'error';
 
 @Component({
   selector: 'songs-list',
-  templateUrl: './songs-list.component.html'
+  templateUrl: './songs-list.component.html',
 })
 export class SongsListComponent implements OnInit, OnChanges {
   @Input()
-  specification : SongListSpecification = new AllSongsSpecification();
+  specification: SongListSpecification = new AllSongsSpecification();
 
-  songs: Song[] = []
-  
+  @Input()
+  defaultCount = 15;
+
+  songs: Song[] = [];
+
   private state: State = 'loading';
 
-  constructor(
-    private service: SongsService) { }
+  constructor(private service: SongsService) {}
+
+  onScroll() {
+    this.state = 'loading';
+    this.specification
+      .get(
+        this.service,
+        this.songs.length + this.defaultCount,
+        this.songs.length
+      )
+      .subscribe({
+        next: (n) => n.forEach((x) => this.songs.push(x)),
+        error: (e) => (this.state = 'error'),
+        complete: () => (this.state = 'complete'),
+      });
+  }
 
   isNotFound(): boolean {
     return this.state == 'complete' && this.songs.length == 0;
@@ -42,12 +64,11 @@ export class SongsListComponent implements OnInit, OnChanges {
 
   private update() {
     this.songs = [];
-    this.state = 'loading'
-    this.specification.get(this.service, 10, 0)
-      .subscribe({
-        next: n => this.songs = n,
-        error: e => this.state = 'error',
-        complete: () => this.state = 'complete'
-      });
+    this.state = 'loading';
+    this.specification.get(this.service, this.defaultCount, 0).subscribe({
+      next: (n) => (this.songs = n),
+      error: (e) => (this.state = 'error'),
+      complete: () => (this.state = 'complete'),
+    });
   }
 }

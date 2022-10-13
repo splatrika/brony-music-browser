@@ -1,6 +1,16 @@
-<ng-template [ngIf]="getState() != 'error'">
+<div
+  class="scroll h-100"
+  infinite-scroll
+  [infiniteScrollDistance]="2"
+  [scrollWindow]="false"
+  (scrolled)="onScroll()"
+>
+  <ng-template [ngIf]="getState() != 'error'">
     <song-item *ngFor="let s of songs" [song]="s"></song-item>
     <span class="sad" *ngIf="isNotFound()">No songs found</span>
-    <span *ngIf="getState() == 'loading'">Loading...</span>
-</ng-template>
-<span *ngIf="getState() == 'error'">The service is temporary unavaible</span>
+    <span *ngIf="getState() == 'loading'">
+      <div class="horizontal-wrapper centered">Loading...</div>
+    </span>
+  </ng-template>
+  <span *ngIf="getState() == 'error'">The service is temporary unavaible</span>
+</div>

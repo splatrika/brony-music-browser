@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Directive,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
@@ -19,7 +25,7 @@ describe('SongsListComponent', () => {
       youTubeId: '',
       artists: [],
       characters: [],
-      genres: []
+      genres: [],
     },
     {
       id: 2,
@@ -29,23 +35,27 @@ describe('SongsListComponent', () => {
       youTubeId: '',
       artists: [],
       characters: [],
-      genres: []
-    }
-  ]
-  
+      genres: [],
+    },
+  ];
+
   class MockSongsService {}
 
   class MockSpecification implements SongListSpecification {
-    get(service: SongsService, count: number, offset: number): Observable<Song[]> {
-      return new Observable(subscriber => {
+    get(
+      service: SongsService,
+      count: number,
+      offset: number
+    ): Observable<Song[]> {
+      return new Observable((subscriber) => {
         subscriber.next(fakeSongs);
         subscriber.complete();
-      })
+      });
     }
   }
 
   @Component({
-    selector: 'song-item'
+    selector: 'song-item',
   })
   class MockSongItemComponent {
     @Input()
@@ -56,24 +66,63 @@ describe('SongsListComponent', () => {
   let fixture: ComponentFixture<SongsListComponent>;
   let itemComponents: SongItemComponent[];
 
+  @Directive({
+    selector: '[infinite-scroll]',
+  })
+  class MockInfiniteScrollDirective {
+    @Input()
+    infiniteScrollDistance!: number;
+
+    @Input()
+    infiniteScrollUpDistance!: number;
+
+    @Input()
+    infiniteScrollThrottle!: number;
+
+    @Input()
+    scrollWindow!: boolean;
+
+    @Input()
+    immediateCheck!: boolean;
+
+    @Input()
+    infiniteScrollDisabled!: boolean;
+
+    @Input()
+    horizontal!: boolean;
+
+    @Input()
+    alwaysCallback!: boolean;
+
+    @Input()
+    infiniteScrollContainer!: string | HTMLElement;
+
+    @Input()
+    fromRoot!: boolean;
+
+    @Output()
+    scrolled = new EventEmitter();
+
+    @Output()
+    scrolledUp = new EventEmitter();
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         SongsListComponent,
-        MockSongItemComponent
+        MockSongItemComponent,
+        MockInfiniteScrollDirective,
       ],
-      providers: [
-        { provide: SongsService, useClass: MockSongsService }
-      ]
-    })
-    .compileComponents();
+      providers: [{ provide: SongsService, useClass: MockSongsService }],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SongsListComponent);
     component = fixture.componentInstance;
     component.specification = new MockSpecification();
     fixture.detectChanges();
     let items = fixture.debugElement.queryAll(By.css('song-item'));
-    itemComponents = items.map(i => i.componentInstance)
+    itemComponents = items.map((i) => i.componentInstance);
   });
 
   it('should create', () => {
@@ -89,7 +138,17 @@ describe('SongsListComponent', () => {
   });
 
   it('should pass songs to items', () => {
-    let passedSongs = itemComponents.map(i => i.song);
+    let passedSongs = itemComponents.map((i) => i.song);
     expect(passedSongs).toEqual(jasmine.arrayWithExactContents(fakeSongs));
+  });
+
+  it('should load songs on scroll', () => {
+    spyOn(component.specification, 'get').and.callThrough();
+    component.onScroll();
+    expect(component.specification.get).toHaveBeenCalledWith(
+      jasmine.anything(),
+      component.defaultCount + 2,
+      2
+    );
   });
 });
