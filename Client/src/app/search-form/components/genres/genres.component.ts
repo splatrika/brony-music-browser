@@ -1,5 +1,17 @@
-import { Component, ComponentRef, ContentChild, Input, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  ComponentRef,
+  ContentChild,
+  Input,
+  ViewChild,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormArray,
+  FormControl,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { Genre } from 'src/app/core/models/genre.model';
 import { GenresService } from 'src/app/core/services/data/genres.service';
 import { SimpleResourceServiceBase } from 'src/app/core/services/data/simple-resources.service.base';
@@ -13,13 +25,13 @@ import { ListSelectControlComponent } from 'src/app/shared/components/list-selec
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: GenresComponent
+      useExisting: GenresComponent,
     },
     {
       provide: SimpleResourceServiceBase<any>,
-      useClass: GenresService
-    }
-  ]
+      useClass: GenresService,
+    },
+  ],
 })
 export class GenresComponent implements ControlValueAccessor {
   formControl = new FormControl<number[]>([]);
@@ -29,8 +41,7 @@ export class GenresComponent implements ControlValueAccessor {
   }
 
   registerOnChange(fn: any): void {
-    this.formControl.valueChanges
-      .subscribe(x => fn(x));
+    this.formControl.valueChanges.subscribe((x) => fn(x));
   }
 
   registerOnTouched(fn: any): void {}
@@ -38,9 +49,12 @@ export class GenresComponent implements ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     if (isDisabled) {
       this.formControl.disable();
-    }
-    else {
+    } else {
       this.formControl.enable();
     }
+  }
+
+  getView(genre: Genre) {
+    return genre.caption;
   }
 }

@@ -1,7 +1,12 @@
 <group title="characters" class="pony-list">
-    <list-select-control [formControl]="control" [defaultCount]="7">
-        <ng-template let-pony let-control="boolControl">
-            <pony-checkbox [control]="control" [iconUrl]="pony.icon"></pony-checkbox>
-        </ng-template>
-    </list-select-control>
+  <list-select-control
+    [formControl]="control"
+    [defaultCount]="7"
+    resourceName="characters"
+    [captionView]="getView"
+  >
+    <ng-template let-pony let-control="boolControl">
+      <pony-checkbox [control]="control" [iconUrl]="pony.icon"></pony-checkbox>
+    </ng-template>
+  </list-select-control>
 </group>

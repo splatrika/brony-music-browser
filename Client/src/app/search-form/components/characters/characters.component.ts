@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { Character } from 'src/app/core/models/character.model';
 import { CharactersService } from 'src/app/core/services/data/characters.service';
 import { SimpleResourceServiceBase } from 'src/app/core/services/data/simple-resources.service.base';
 
@@ -10,13 +15,13 @@ import { SimpleResourceServiceBase } from 'src/app/core/services/data/simple-res
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: CharactersComponent
+      useExisting: CharactersComponent,
     },
     {
       provide: SimpleResourceServiceBase<any>,
-      useClass: CharactersService
-    }
-  ]
+      useClass: CharactersService,
+    },
+  ],
 })
 export class CharactersComponent implements ControlValueAccessor {
   control = new FormControl<number[]>([]);
@@ -26,8 +31,7 @@ export class CharactersComponent implements ControlValueAccessor {
   }
 
   registerOnChange(fn: any): void {
-    this.control.valueChanges
-      .subscribe(x => fn(x))
+    this.control.valueChanges.subscribe((x) => fn(x));
   }
 
   registerOnTouched(fn: any): void {}
@@ -35,9 +39,12 @@ export class CharactersComponent implements ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     if (isDisabled) {
       this.control.disable();
-    }
-    else {
+    } else {
       this.control.enable();
     }
-  } 
+  }
+
+  getView(character: Character) {
+    return character.name;
+  }
 }
