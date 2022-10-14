@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Splatrika.BronyMusicBrowser.Infrastructure.Data.Identity;
+using Splatrika.BronyMusicBrowser.WebAdmin;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,13 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var adminSeed = ActivatorUtilities
+        .CreateInstance<AdminSeed>(scope.ServiceProvider);
+    await adminSeed.TrySeed();
 }
 
 app.UseHttpsRedirection();
