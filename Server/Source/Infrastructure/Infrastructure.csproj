@@ -13,6 +13,8 @@
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Data\Repositories\" />
     <None Remove="Data\Repositories\ReadOnly\" />
+    <None Remove="Data\Identity\" />
+    <None Remove="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
@@ -22,12 +24,14 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Data\Configuration\" />
     <Folder Include="Data\Repositories\" />
     <Folder Include="Data\Repositories\ReadOnly\" />
+    <Folder Include="Data\Identity\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
