@@ -16,6 +16,7 @@
     <None Remove="CreateArgs\" />
     <None Remove="Projections\" />
     <None Remove="Projections\Album\" />
+    <None Remove="Constrants\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -25,6 +26,7 @@
     <Folder Include="CreateArgs\" />
     <Folder Include="Projections\" />
     <Folder Include="Projections\AlbumAggregate\" />
+    <Folder Include="Constrants\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
