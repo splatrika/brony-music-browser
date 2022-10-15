@@ -7,7 +7,8 @@ namespace Splatrika.BronyMusicBrowser.Infrastructure.Data.Identity;
 
 public class IdentityContext : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
-    public IdentityContext(DbContextOptions options) : base(options)
+    public IdentityContext(DbContextOptions<IdentityContext> options)
+        : base(options)
     {
     }
 }
