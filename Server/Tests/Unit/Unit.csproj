@@ -22,6 +22,7 @@
     </PackageReference>
     <PackageReference Include="Moq" Version="4.18.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.10" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,10 @@
     <None Remove="Core\Builders\" />
     <None Remove="Extensions\" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Microsoft.AspNetCore.Authorization" />
+    <None Remove="WebAdmin\" />
+    <None Remove="WebAdmin\Authorization\" />
+    <None Remove="WebAdmin\Authorization\Handlers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Core\Core.csproj" />
@@ -43,5 +48,8 @@
     <Folder Include="Core\Entities\" />
     <Folder Include="Core\Builders\" />
     <Folder Include="Extensions\" />
+    <Folder Include="WebAdmin\" />
+    <Folder Include="WebAdmin\Authorization\" />
+    <Folder Include="WebAdmin\Authorization\Handlers\" />
   </ItemGroup>
 </Project>
