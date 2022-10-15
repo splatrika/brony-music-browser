@@ -3,6 +3,7 @@ using Splatrika.BronyMusicBrowser.Infrastructure.Data.Identity;
 using Splatrika.BronyMusicBrowser.WebAdmin;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Splatrika.BronyMusicBrowser.WebAdmin.Services;
+using Splatrika.BronyMusicBrowser.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,17 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 builder.Services.AddAuthorisationHandlers();
 
 builder.Services.AddScoped<IEmailSender, FakeEmailSender>();
+
+builder.Services.AddBrowserContext(builder.Configuration);
+
+builder.Services.AddCrudRepositories();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 
@@ -43,6 +55,16 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
 
+
+app.MapControllerRoute(name: "default",
+    pattern: "{area}/{controller}/{action=Index}");
+
 app.MapRazorPages();
+
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/Library/Songs");
+    return Task.CompletedTask;
+});
 
 app.Run();

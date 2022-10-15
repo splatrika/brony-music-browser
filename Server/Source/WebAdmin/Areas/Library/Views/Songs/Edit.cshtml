@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model SongCreateArgs
+
+@{
+    var youtubePlayer = $"https://youtube.com/embed/{Model.YouTubeId}";
+}
+
+<div class="mb-3">
+    <a class="btn btn-light" asp-action="Index">Back</a>
+    <b>Edit song: @Model.Title</b>
+</div>
+<div class="mb-5">
+    <a class="btn btn-dark">Details</a>
+    <a class="btn btn-link">Artists</a>
+    <a class="btn btn-link">Genres</a>
+    <a class="btn btn-link">Characters</a>
+</div>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Title"></label>
+        <input class="form-control" asp-for="Title" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Year"></label>
+        <input class="form-control" asp-for="Year" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Cover"></label>
+        <input class="form-control" asp-for="Cover" />
+        <p>Cover preview:</p>
+        <p>
+            <img width="200" src="@Model.Cover" />
+        </p>
+    </div>
+    <div class="mb-3">
+        <label asp-for="YouTubeId"></label>
+        <input class="form-control" asp-for="YouTubeId" />
+        <p>YouTube preview</p>
+        <p>
+            <iframe class="player"
+                    id="ytplayer"
+                    type="text/html"
+                    width="640"
+                    height="360"
+                    src="@youtubePlayer"
+                    frameborder="0">
+            </iframe>
+        </p>
+    </div>
+    <button class="btn btn-primary">Update</button>
+</form>

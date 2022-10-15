@@ -1,0 +1,30 @@
+﻿@model SongEditViewModel
+
+<div class="mb-5">
+    <a class="btn btn-secondary" asp-action="Index">Back</a>
+    <b>Add new song</b>
+</div>
+
+<form method="post" asp-action="CreateConfirmed">
+    <div class="mb-3">
+        <label asp-for="Title"></label>
+        <input class="form-control" asp-for="Title" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Year"></label>
+        <input class="form-control" asp-for="Year" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Cover"></label>
+        <input class="form-control" asp-for="Cover" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="YouTubeId"></label>
+        <input class="form-control" asp-for="YouTubeId" />
+    </div>
+    <button class="btn btn-primary">Add</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
