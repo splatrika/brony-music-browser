@@ -65,7 +65,7 @@ public abstract class EfCrudRepositoryBase<TEntity, TCreateArgs, TContext>
     }
 
 
-    public async Task<List<TEntity>> GetAll(int id, int count, int offset)
+    public async Task<List<TEntity>> GetAll(int count, int offset)
     {
         var items = await _context.Set<TEntity>()
             .Skip(offset)
