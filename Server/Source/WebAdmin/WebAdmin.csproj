@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Views\" />
+    <None Remove="Views\Shared\" />
     <None Remove="Microsoft.AspNetCore.Identity.UI" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Services\" />
@@ -20,6 +22,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="Views\Shared\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <PropertyGroup>
