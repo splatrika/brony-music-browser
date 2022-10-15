@@ -16,6 +16,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<IdentityContext>();
 
+builder.Services.AddAuthorisationHandlers();
+
 builder.Services.AddScoped<IEmailSender, FakeEmailSender>();
 
 var app = builder.Build();
