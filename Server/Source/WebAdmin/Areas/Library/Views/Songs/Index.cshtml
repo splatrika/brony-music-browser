@@ -1,45 +1,29 @@
 ﻿@model LibraryIndexViewModel<Song>
 
 @{
-    var nextPage = Model.Page + 1;
-    var previousPage = Model.Page - 1;
     ViewData["CurrentResource"] = "Songs";
 }
 
-<div class="mb-5">
-    <a class="btn btn-primary" asp-action="Create">Create</a>
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var song in Model.Items)
+@{
+    var indexModel = new IndexPartialViewModel
+    {
+        Page = Model.Page,
+        PageStep = Model.PageStep,
+        Items = Model.Items,
+        Columns = new[]
         {
-            <tr>
-                <td>@song.Id</td>
-                <td>@song.Title</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@song.Id">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@song.Id">Delete</a>
-                </td>
-            </tr>
+            new IndexPartialViewModel.ColumnInfo
+            {
+                Name = "Id",
+                Getter = x => ((Song)x).Id
+            },
+            new IndexPartialViewModel.ColumnInfo
+            {
+                Name = "Title",
+                Getter = x => ((Song)x).Title
+            }
         }
-    </tbody>
-</table>
+    };
+}
 
-@if (Model.Page > 0)
-{
-    <a class="btn" asp-action="Index" asp-route-page="@previousPage">Previous page</a>
-}
-@if (Model.Items.Count() == Model.PageStep)
-{
-    <a class="btn" asp-action="Index" asp-route-page="@nextPage" asp-route-previousPage="@Model.Page">
-        Next page
-    </a>
-}
+<partial name="_IndexPartial" model="indexModel" />

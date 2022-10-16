@@ -12,155 +12,46 @@ namespace Splatrika.BronyMusicBrowser.WebAdmin.Areas.Library.Controllers;
 
 [Area("Library")]
 [LibraryResourceController("Songs")]
-public class SongsController : Controller
+public class SongsController : LibraryControllerBase
+    <Song, SongCreateArgs, SongEditViewModel, SongEditViewModel>
 {
-    public readonly int PageStep = 10;
-
-    private readonly ICrudRepository<Song, SongCreateArgs> _repository;
-    private readonly IAuthorizationService _authorizationService;
-
-
-    public SongsController(ICrudRepository<Song, SongCreateArgs> repository,
+    public SongsController(
+        ICrudRepository<Song, SongCreateArgs> repository,
         IAuthorizationService authorizationService)
+        : base(repository, authorizationService)
     {
-        _repository = repository;
-        _authorizationService = authorizationService;
+    }
+
+    public override Task<Song> Create(SongEditViewModel model,
+        ICrudRepository<Song, SongCreateArgs> repository)
+    {
+        return repository.Create(new(
+            model.Title,
+            model.Cover,
+            model.Year,
+            model.YouTubeId));
     }
 
 
-    public async Task<IActionResult> Index(int? page, int? previousPage)
+    public override void Edit(SongEditViewModel model, Song resource)
     {
-        var songs = await _repository.GetAll(
-            count: PageStep,
-            offset: PageStep * page ?? 0);
-        if (!await Authorize(songs, Operations.Read))
-        {
-            return Forbid();
-        }
-        if (songs.Count() == 0)
-        {
-            return RedirectToAction("Index",
-                new { page = previousPage ?? 0 });
-        }
-        return View(new LibraryIndexViewModel<Song>
-        {
-            PageStep = PageStep,
-            Page = page ?? 0,
-            Items = songs
-        });
+        resource.UpdateDetails(
+            model.Title,
+            model.Year,
+            model.YouTubeId,
+            model.Cover);
     }
 
 
-    public async Task<IActionResult> Edit(int id)
+    public override SongEditViewModel GetEditViewModel(Song resource)
     {
-        if (!await _repository.Contains(id))
+        return new SongEditViewModel
         {
-            return NotFound();
-        }
-
-        var song = await _repository.Get(id);
-        if (!await Authorize(song, Operations.Update))
-        {
-            return Forbid();
-        }
-
-        var model = new SongCreateArgs(song.Title, song.Cover, song.Year, song.YouTubeId);
-
-        return View(model);
-    }
-
-
-    [HttpPost]
-    public async Task<IActionResult> Edit(int id, SongCreateArgs values)
-    {
-        if (!await _repository.Contains(id))
-        {
-            return NotFound();
-        }
-
-        var song = await _repository.Get(id);
-        if (!await Authorize(song, Operations.Update))
-        {
-            return Forbid();
-        }
-
-        song.UpdateDetails(
-            values.Title,
-            values.Year,
-            values.YouTubeId,
-            values.Cover);
-
-        await _repository.SaveChanges();
-
-        return RedirectToAction("Edit", new { Id = id });
-    }
-
-
-    public async Task<IActionResult> Delete(int id)
-    {
-        if (!await _repository.Contains(id))
-        {
-            return NotFound();
-        }
-        if (!await Authorize(null, Operations.Delete))
-        {
-            return Forbid();
-        }
-
-        var song = await _repository.Get(id);
-        return View(song);
-    }
-
-
-    [HttpPost("Delete")]
-    public async Task<IActionResult> DeleteConfirmed(int id)
-    {
-        if (!await _repository.Contains(id))
-        {
-            return NotFound();
-        }
-        if (!await Authorize(null, Operations.Delete))
-        {
-            return Forbid();
-        }
-
-        await _repository.Delete(id);
-        return RedirectToAction("Index");
-    }
-
-
-    public async Task<IActionResult> Create()
-    {
-        if (!await Authorize(null, Operations.Create))
-        {
-            return Forbid();
-        }
-
-        return View();
-    }
-
-
-    [HttpPost]
-    public async Task<IActionResult> CreateConfirmed(SongEditViewModel args)
-    {
-        if (!await Authorize(null, Operations.Create))
-        {
-            return Forbid();
-        }
-        var song = await _repository.Create(args.ToCreateArgs());
-
-        return RedirectToAction("Edit", new { Id = song.Id });
-    }
-
-
-    private async Task<bool> Authorize(object? resource, string operation)
-    {
-        var result = await _authorizationService
-            .AuthorizeAsync(
-                User,
-                resource,
-                new LibraryOperationRequirement(operation));
-        return result.Succeeded;
+            Title = resource.Title,
+            Cover = resource.Cover,
+            Year = resource.Year,
+            YouTubeId = resource.YouTubeId
+        };
     }
 }
 
