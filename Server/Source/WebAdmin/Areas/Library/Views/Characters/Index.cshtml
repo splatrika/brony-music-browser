@@ -1,0 +1,28 @@
+﻿@model LibraryIndexViewModel<Character>
+@{
+    ViewData["CurrentResource"] = "Characters";
+}
+
+@{
+    var indexModel = new IndexPartialViewModel
+    {
+        Page = Model.Page,
+        PageStep = Model.PageStep,
+        Items = Model.Items,
+        Columns = new[]
+{
+            new IndexPartialViewModel.ColumnInfo
+            {
+                Name = "Id",
+                Getter = x => ((Character)x).Id
+            },
+            new IndexPartialViewModel.ColumnInfo
+            {
+                Name = "Name",
+                Getter = x => ((Character)x).Name
+            }
+        }
+    };
+}
+
+<partial name="_IndexPartial" model="indexModel" />
