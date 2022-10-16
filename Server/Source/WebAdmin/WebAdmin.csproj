@@ -23,6 +23,7 @@
     <None Remove="Interfaces\" />
     <None Remove="ViewModels\" />
     <None Remove="Attributes\" />
+    <None Remove="Areas\Library\Views\Artists\" />
     <None Remove="Areas\Library\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +49,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Attributes\" />
+    <Folder Include="Areas\Library\Views\Artists\" />
     <Folder Include="Areas\Library\Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>

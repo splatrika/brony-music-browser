@@ -1,0 +1,11 @@
+﻿@model Artist
+@{
+    var deleteModel = new DeleteViewModel
+    {
+        ResourceName = "Artist",
+        Caption = Model.Name,
+        Id = Model.Id
+    };
+}
+
+<partial name="_DeletePartial" model="deleteModel" />
