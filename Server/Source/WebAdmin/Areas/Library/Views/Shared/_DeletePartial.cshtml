@@ -1,0 +1,8 @@
+﻿@model DeleteViewModel
+
+<h5>Are you sure to delete this @Model.ResourceName.ToLower()?</h5>
+<p>(@Model.Id) @Model.Caption</p>
+<p class="danger">This action cann't be undo</p>
+<form method="post">
+    <button class="btn btn-danger">Delete</button>
+</form>
