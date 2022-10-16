@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Splatrika.BronyMusicBrowser.Core.CreateArgs;
 
-namespace Splatrika.BronyMusicBrowser.WebAdmin.Areas.Library.ViewModels;
+namespace Splatrika.BronyMusicBrowser.WebAdmin.ViewModels;
 
 #nullable disable
 

@@ -1,0 +1,22 @@
+﻿@{
+    @if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+}
+
+<div>
+    <h2 class="mb-5">Library</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="/Areas/Library/Views/_NavigationPartial.cshtml" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

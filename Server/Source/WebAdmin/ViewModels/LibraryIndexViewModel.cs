@@ -1,9 +1,10 @@
-﻿using System;
-namespace Splatrika.BronyMusicBrowser.WebAdmin.Areas.Library.ViewModels;
+﻿using System.Linq.Expressions;
+
+namespace Splatrika.BronyMusicBrowser.WebAdmin.ViewModels;
 
 #nullable disable
 
-public class IndexViewModel<TResource>
+public class LibraryIndexViewModel<TResource>
 {
     public int Page { get; init; }
     public int PageStep { get; init; }

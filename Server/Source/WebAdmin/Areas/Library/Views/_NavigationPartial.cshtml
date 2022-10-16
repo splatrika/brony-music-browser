@@ -1,0 +1,29 @@
+﻿@inject ILibraryViewService service
+@{
+    var current = "";
+    if (ViewData.ContainsKey("CurrentResource"))
+    {
+        current = ViewData["CurrentResource"] as string;
+    }
+
+    var resources = service.GetResources();
+    var activeElementClasses = new Dictionary<string, string>();
+    foreach (var resource in resources)
+    {
+        activeElementClasses.Add(
+            key: resource.ResourceName,
+            value: resource.ResourceName == current ? "active" : "");
+    }
+}
+
+<ul class="nav nav-pills flex-column">
+    @foreach (var resource in resources.OrderBy(x => x.Order))
+    {
+        <li class="nav-item">
+            <a asp-controller="@resource.ControllerName" asp-action="Index"
+               class="nav-link @activeElementClasses[resource.ResourceName]">
+                @resource.ResourceName
+            </a>
+        </li>
+    }
+</ul>

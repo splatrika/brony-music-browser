@@ -4,6 +4,7 @@ using Splatrika.BronyMusicBrowser.WebAdmin;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Splatrika.BronyMusicBrowser.WebAdmin.Services;
 using Splatrika.BronyMusicBrowser.Infrastructure;
+using Splatrika.BronyMusicBrowser.WebAdmin.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
+
+builder.Services.AddSingleton<ILibraryViewService, LibraryViewService>();
 
 var app = builder.Build();
 

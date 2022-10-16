@@ -20,7 +20,9 @@
     <None Remove="Authorization\" />
     <None Remove="Authorization\Handlers\" />
     <None Remove="Authorization\Requirements\" />
-    <None Remove="Areas\Library\ViewModels\" />
+    <None Remove="Interfaces\" />
+    <None Remove="ViewModels\" />
+    <None Remove="Attributes\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
@@ -42,7 +44,9 @@
     <Folder Include="Authorization\" />
     <Folder Include="Authorization\Handlers\" />
     <Folder Include="Authorization\Requirements\" />
-    <Folder Include="Areas\Library\ViewModels\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Attributes\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
