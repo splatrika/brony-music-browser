@@ -1,0 +1,11 @@
+﻿@model Genre
+@{
+    var deleteModel = new DeleteViewModel
+    {
+        Id = Model.Id,
+        Caption = Model.Caption,
+        ResourceName = "Genre"
+    };
+}
+
+<partial name="_DeletePartial" model="deleteModel" />

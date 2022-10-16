@@ -26,6 +26,7 @@
     <None Remove="Areas\Library\Views\Artists\" />
     <None Remove="Areas\Library\Views\Shared\" />
     <None Remove="Areas\Library\Views\Characters\" />
+    <None Remove="Areas\Library\Views\Genres\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
@@ -53,6 +54,7 @@
     <Folder Include="Areas\Library\Views\Artists\" />
     <Folder Include="Areas\Library\Views\Shared\" />
     <Folder Include="Areas\Library\Views\Characters\" />
+    <Folder Include="Areas\Library\Views\Genres\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
