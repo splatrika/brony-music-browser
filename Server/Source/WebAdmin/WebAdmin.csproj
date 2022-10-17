@@ -27,6 +27,7 @@
     <None Remove="Areas\Library\Views\Shared\" />
     <None Remove="Areas\Library\Views\Characters\" />
     <None Remove="Areas\Library\Views\Genres\" />
+    <None Remove="Authorization\Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
@@ -55,6 +56,7 @@
     <Folder Include="Areas\Library\Views\Shared\" />
     <Folder Include="Areas\Library\Views\Characters\" />
     <Folder Include="Areas\Library\Views\Genres\" />
+    <Folder Include="Authorization\Extensions\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>

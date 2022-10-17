@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Splatrika.BronyMusicBrowser.Core.Entities;
 using Splatrika.BronyMusicBrowser.Core.Interfaces;
 using Splatrika.BronyMusicBrowser.WebAdmin.Authorization;
-using Splatrika.BronyMusicBrowser.WebAdmin.Authorization.Requirements;
+using Splatrika.BronyMusicBrowser.WebAdmin.Authorization.Extensions;
 using Splatrika.BronyMusicBrowser.WebAdmin.ViewModels;
 
 namespace Splatrika.BronyMusicBrowser.WebAdmin.Areas.Library.Controllers;
@@ -42,14 +42,15 @@ public abstract class LibraryControllerBase
 
     public async Task<IActionResult> Index(int? page, int? previousPage)
     {
-        var songs = await _repository.GetAll(
+        var items = await _repository.GetAll(
             count: PageStep,
             offset: PageStep * page ?? 0);
-        if (!await Authorize(songs, Operations.Read))
+        if (!await _authorizationService
+                .AuthorizeLibraryOperation(items, Operations.Update, User))
         {
             return Forbid();
         }
-        if (songs.Count() == 0)
+        if (items.Count() == 0)
         {
             return RedirectToAction("Index",
                 new { page = previousPage ?? 0 });
@@ -58,7 +59,7 @@ public abstract class LibraryControllerBase
         {
             PageStep = PageStep,
             Page = page ?? 0,
-            Items = songs
+            Items = items
         });
     }
 
@@ -71,8 +72,9 @@ public abstract class LibraryControllerBase
         }
 
         var item = await _repository.Get(id);
-        if (!await Authorize(item, Operations.Update))
-        {
+        if (!await _authorizationService
+                .AuthorizeLibraryOperation(item, Operations.Update, User))
+            {
             return Forbid();
         }
 
@@ -91,7 +93,8 @@ public abstract class LibraryControllerBase
         }
 
         var item = await _repository.Get(id);
-        if (!await Authorize(item, Operations.Update))
+        if (!await _authorizationService
+                .AuthorizeLibraryOperation(item, Operations.Update, User))
         {
             return Forbid();
         }
@@ -115,13 +118,14 @@ public abstract class LibraryControllerBase
         {
             return NotFound();
         }
-        if (!await Authorize(null, Operations.Delete))
+        if (!await _authorizationService
+                .AuthorizeLibraryOperation(null, Operations.Delete, User))
         {
             return Forbid();
         }
 
-        var song = await _repository.Get(id);
-        return View(song);
+        var item = await _repository.Get(id);
+        return View(item);
     }
 
 
@@ -133,7 +137,8 @@ public abstract class LibraryControllerBase
         {
             return NotFound();
         }
-        if (!await Authorize(null, Operations.Delete))
+        if (!await _authorizationService
+                .AuthorizeLibraryOperation(null, Operations.Delete, User))
         {
             return Forbid();
         }
@@ -145,7 +150,8 @@ public abstract class LibraryControllerBase
 
     public async Task<IActionResult> Create()
     {
-        if (!await Authorize(null, Operations.Create))
+        if (!await _authorizationService
+                .AuthorizeLibraryOperation(null, Operations.Create, User))
         {
             return Forbid();
         }
@@ -158,7 +164,8 @@ public abstract class LibraryControllerBase
     [ActionName("Create")]
     public async Task<IActionResult> CreateConfirmed(TCreateViewModel values)
     {
-        if (!await Authorize(null, Operations.Create))
+        if (!await _authorizationService
+                .AuthorizeLibraryOperation(null, Operations.Create, User))
         {
             return Forbid();
         }
@@ -170,17 +177,6 @@ public abstract class LibraryControllerBase
         }
 
         return RedirectToAction("Edit", new { Id = item.Id });
-    }
-
-
-    private async Task<bool> Authorize(object? resource, string operation)
-    {
-        var result = await _authorizationService
-            .AuthorizeAsync(
-                User,
-                resource,
-                new LibraryOperationRequirement(operation));
-        return result.Succeeded;
     }
 }
 
