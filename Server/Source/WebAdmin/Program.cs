@@ -26,6 +26,10 @@ builder.Services.AddBrowserContext(builder.Configuration);
 
 builder.Services.AddCrudRepositories();
 
+builder.Services.AddFilterProcessors();
+
+builder.Services.AddReadOnlyRepositories();
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Identity/Account/Login";
@@ -34,6 +38,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddSingleton<ILibraryViewService, LibraryViewService>();
+builder.Services.AddSingleton<ISongEditViewService, SongEditViewService>();
 
 var app = builder.Build();
 
