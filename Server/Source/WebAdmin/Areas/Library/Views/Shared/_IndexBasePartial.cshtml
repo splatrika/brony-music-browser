@@ -1,0 +1,28 @@
+﻿@model IndexPartialViewModel
+
+<table class="table">
+    <thead>
+        <tr>
+            @foreach (var column in Model.Columns)
+            {
+                <th scope="col">@column.Name</th>
+            }
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            var actionsModel = new ActionsPartialViewModel { ItemId = item.Id };
+            <tr>
+                @foreach (var column in Model.Columns)
+                {
+                    <td>@column.Getter(item)</td>
+                }
+                <td>
+                    <partial name="@Model.ActionsPartialName" model="actionsModel" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Splatrika.BronyMusicBrowser.Core.Entities;
+﻿using Splatrika.BronyMusicBrowser.Core.Entities;
 
 namespace Splatrika.BronyMusicBrowser.WebAdmin.ViewModels;
 
@@ -11,6 +10,7 @@ public class IndexPartialViewModel
     public int PageStep { get; init; }
     public IEnumerable<EntityBase> Items { get; init; }
     public IEnumerable<ColumnInfo> Columns { get; init; }
+    public string ActionsPartialName { get; init; }
 
     public class ColumnInfo
     {

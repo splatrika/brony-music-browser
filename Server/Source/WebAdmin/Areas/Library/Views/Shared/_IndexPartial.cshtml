@@ -2,39 +2,13 @@
 @{
     var nextPage = Model.Page + 1;
     var previousPage = Model.Page - 1;
-    ViewData["CurrentResource"] = "Songs";
 }
 
 <div class="mb-5">
     <a class="btn btn-primary" asp-action="Create">Create</a>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            @foreach (var column in Model.Columns)
-            {
-                <th scope="col">@column.Name</th>
-            }
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                @foreach (var column in Model.Columns)
-                {
-                    <td>@column.Getter(item)</td>
-                }
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<partial name="_IndexBasePartial" model="Model" />
 
 @if (Model.Page > 0)
 {
@@ -46,5 +20,3 @@
         Next page
     </a>
 }
-
-
