@@ -1,19 +1,18 @@
 ﻿@model SongEditViewModel
+@{
+    ViewData["CurrentSongEditTab"] = "Details";
+}
 
 @{
     var youtubePlayer = $"https://youtube.com/embed/{Model.YouTubeId}";
+    var headerModel = new SongEditHeaderPartialViewModel
+    {
+        Id = ViewBag.Id ?? 0,
+        Title = Model.Title
+    };
 }
 
-<div class="mb-3">
-    <a class="btn btn-light" asp-action="Index">Back</a>
-    <b>Edit song: @Model.Title</b>
-</div>
-<div class="mb-5">
-    <a class="btn btn-dark">Details</a>
-    <a class="btn btn-link">Artists</a>
-    <a class="btn btn-link">Genres</a>
-    <a class="btn btn-link">Characters</a>
-</div>
+<partial name="_SongEditHeaderPartial" model="headerModel" />
 
 <form method="post">
     <div class="mb-3">

@@ -12,6 +12,7 @@ namespace Splatrika.BronyMusicBrowser.WebAdmin.Areas.Library.Controllers;
 
 [Area("Library")]
 [LibraryResourceController("Songs")]
+[SongEditTabController(tabName: "Details", actionName: "Edit")]
 public class SongsController : LibraryControllerBase
     <Song, SongCreateArgs, SongEditViewModel, SongEditViewModel>
 {
