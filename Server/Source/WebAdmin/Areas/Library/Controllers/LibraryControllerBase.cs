@@ -80,6 +80,8 @@ public abstract class LibraryControllerBase
 
         var model = GetEditViewModel(item);
 
+        ViewBag.Id = item.Id;
+
         return View(model);
     }
 
