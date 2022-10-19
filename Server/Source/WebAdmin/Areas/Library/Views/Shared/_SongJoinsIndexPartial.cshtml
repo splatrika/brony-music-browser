@@ -1,0 +1,27 @@
+﻿@model SongJoinsIndexPartialViewModel
+@{
+    var nextPage = Model.Page + 1;
+    var previousPage = Model.Page - 1;
+}
+
+<partial name="_IndexBasePartial" model="Model" />
+
+@if (Model.Page > 0)
+{
+    <a class="btn" asp-action="Add"
+       asp-route-songId="@Model.SongId"
+       asp-route-page="@previousPage"
+    >
+        Previous page
+    </a>
+}
+@if (Model.Items.Count() == Model.PageStep)
+{
+    <a class="btn" asp-action="Add"
+       asp-route-songId="@Model.SongId"
+       asp-route-page="@nextPage"
+       asp-route-previousPage="@Model.Page"
+    >
+        Next page
+    </a>
+}

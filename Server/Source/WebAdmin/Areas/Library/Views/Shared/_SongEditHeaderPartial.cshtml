@@ -1,0 +1,36 @@
+﻿@model SongEditHeaderPartialViewModel
+@inject ISongEditViewService service
+
+@{
+    string? selectedTab = null;
+    if (ViewData.ContainsKey("CurrentSongEditTab"))
+    {
+        selectedTab = (string)ViewData["CurrentSongEditTab"]!;
+    }
+    var tabs = service.GetTabs();
+    var tabClasses = new Dictionary<string, string>();
+    foreach (var tab in tabs)
+    {
+        tabClasses.Add(
+            tab.TabName,
+            tab.TabName == selectedTab ? "btn-dark" : "btn-link");
+    }
+}
+
+<div class="mb-3">
+    <a class="btn btn-light" asp-controller="Songs" asp-action="Index">Back</a>
+    <b>Edit song: @Model.Title</b>
+</div>
+<div class="mb-5">
+    @foreach (var tab in tabs)
+    {
+        <a class="btn @tabClasses[tab.TabName]"
+           asp-controller="@tab.ControllerName"
+           asp-action="@tab.ActionName"
+           asp-route-id="@Model.Id"
+           asp-route-songId="@Model.Id"
+        >
+            @tab.TabName
+        </a>
+    }
+</div>

@@ -1,0 +1,40 @@
+﻿@{
+
+    @if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    @if (ViewData.TryGetValue("NextParentLayout", out parentLayout))
+    {
+        ViewData["ParentLayout"] = (string)parentLayout;
+    }
+    var headerModel = new SongEditHeaderPartialViewModel
+    {
+        Id = 0,
+        Title = "Unknown"
+    };
+    if (ViewData.ContainsKey("Song"))
+    {
+        var song = (Song)ViewData["Song"];
+        headerModel = new SongEditHeaderPartialViewModel
+        {
+            Id = song.Id,
+            Title = song.Title
+        };
+    }
+    string error = null;
+    if (ViewData.ContainsKey("ErrorMessage"))
+    {
+        error = (string)ViewData["ErrorMessage"];
+    }
+}
+
+<partial name="_SongEditHeaderPartial" model="headerModel" />
+
+@if (error != null)
+{
+    <partial name="_ErrorViewPartial" model="error" />
+}
+
+@RenderBody()
+
