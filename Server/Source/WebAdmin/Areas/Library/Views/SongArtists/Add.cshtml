@@ -1,0 +1,31 @@
+﻿@model AddSongJoinViewModel<ArtistInfo>
+
+@{
+    var indexModel = new SongJoinsIndexPartialViewModel
+    {
+        Page = Model.Page,
+        PageStep = Model.PageStep,
+        Items = Model.Items,
+        ActionsPartialName = "_AddActionsPartial",
+        SongId = Model.Song.Id,
+        Columns = new[]
+        {
+            new IndexPartialViewModel.ColumnInfo
+            {
+                Name = "Id",
+                Getter = x => ((ArtistInfo)x).Id
+            },
+            new IndexPartialViewModel.ColumnInfo
+            {
+                Name = "Name",
+                Getter = x => ((ArtistInfo)x).Name
+            }
+        }
+    };
+
+    ViewData["Song"] = Model.Song;
+}
+
+<h4>Add artist to song</h4>
+
+<partial name="_SongJoinsIndexPartial" model="indexModel" />

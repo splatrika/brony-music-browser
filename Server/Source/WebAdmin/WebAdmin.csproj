@@ -28,6 +28,7 @@
     <None Remove="Areas\Library\Views\Characters\" />
     <None Remove="Areas\Library\Views\Genres\" />
     <None Remove="Authorization\Extensions\" />
+    <None Remove="Areas\Library\Views\SongArtists\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
@@ -57,6 +58,7 @@
     <Folder Include="Areas\Library\Views\Characters\" />
     <Folder Include="Areas\Library\Views\Genres\" />
     <Folder Include="Authorization\Extensions\" />
+    <Folder Include="Areas\Library\Views\SongArtists\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
